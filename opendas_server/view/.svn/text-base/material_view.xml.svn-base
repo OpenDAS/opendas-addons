@@ -1,0 +1,442 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="view_das_material_form">
+			<field name="name">das.material.form</field>
+			<field name="model">das.material</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="das_material">
+					<field name="code" select="1"/>
+					<field name="name" select="1"/>
+					<field name="model_material_id" select="1"/>
+				</form>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="view_das_material_tree">
+			<field name="name">das.material.tree</field>
+			<field name="model">das.material</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="das_material">
+					<field name="code"/>
+					<field name="name"/>
+					<field name="model_material_id"/>
+				</tree>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_das_material">
+			<field name="name">Material</field>
+			<field name="res_model">das.material</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<menuitem parent="menu_opendas" id="menu_model_material" action="action_das_material"/>
+
+		<record model="ir.ui.view" id="view_das_mask_form">
+			<field name="name">das.mask.form</field>
+			<field name="model">das.mask</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="das_mask">
+					<field name="code" select="1"/>
+					<field name="name" select="1"/>
+					<field name="description" select="1"/>
+				</form>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="view_das_mask_tree">
+			<field name="name">das.mask.tree</field>
+			<field name="model">das.mask</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="das_mask">
+					<field name="code"/>
+					<field name="name"/>
+					<field name="description"/>
+				</tree>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_das_mask">
+			<field name="name">Mask</field>
+			<field name="res_model">das.mask</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<menuitem parent="menu_opendas" id="menu_model_mask" action="action_das_mask"/>
+
+		<record model="ir.ui.view" id="view_das_graphical_configuration_form">
+			<field name="name">das.graphical.configuration.form</field>
+			<field name="model">das.graphical.configuration</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="DAS Graphical configuration">
+					<field name="name" select="1"/>
+					<field name="mask" select="1"/>
+					<field name="graphical_xml" colspan="4" select="2"/>
+				</form>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="view_das_graphical_configuration_tree">
+			<field name="name">das.graphical.configuration.tree</field>
+			<field name="model">das.graphical.configuration</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="DAS Graphical configuration">
+					<field name="name"/>
+					<field name="mask"/>
+				</tree>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_das_graphical_configuration">
+			<field name="name">Graphical configs</field>
+			<field name="res_model">das.graphical.configuration</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<menuitem parent="menu_opendas" id="menu_das_graphical_configuration" action="action_das_graphical_configuration"/>
+			
+		<record model="ir.ui.view" id="view_das_functional_configuration_form">
+			<field name="name">das.functional.configuration.form</field>
+			<field name="model">das.functional.configuration</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="das_functional_configuration">
+					<field name="name" />
+					<field name="mask" select="1"/>
+					<field name="button_xml" colspan="4" select="2"/>
+					<field name="button_bottom_xml" colspan="4" select="2"/>
+					<field name="function_xml" colspan="4" select="2"/>
+					<field name="model_ids" colspan="4" select="2"/>
+				</form>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="view_das_functional_configuration_tree">
+			<field name="name">das.functional.configuration.tree</field>
+			<field name="model">das.functional.configuration</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="das_functional_configuration">
+					<field name="name"/>
+					<field name="mask"/>
+					<field name="button_xml"/>
+					<field name="button_bottom_xml"/>
+					<field name="function_xml"/>
+				</tree>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_das_functional_configuration">
+			<field name="name">Functional configs</field>
+			<field name="res_model">das.functional.configuration</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<menuitem parent="menu_opendas" id="menu_das_functional_configuration" action="action_das_functional_configuration"/>
+
+		<record model="ir.ui.view" id="view_das_workstation_form">
+			<field name="name">das.workstation.form</field>
+			<field name="model">das.workstation</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="das_workstation">
+					<field name="code" select="1"/>
+					<field name="name" select="1"/>
+					<field name="type_workstation_id" select="1"/>
+					<field name="constructor_material_id" select="1"/>
+					<field name="os_id" select="2"/>
+					<newline/>
+					<field name="os_user" select="2"/>
+					<field name="os_password"/>
+					<newline/>
+					<field name="ip_id" select="2"/>
+					<field name="mac_address" select="0"/>
+					<newline/>
+					<field name="location" select="0"/>
+					<field name="phone_number" select="0"/>
+					<newline/>
+					<field name="hour_start_activity" select="2"/>
+					<field name="hour_stop_activity" select="2"/>
+					<newline/>
+					<field name="force_pdf" select="0"/><!--
+					<field name="mask" select="0"/>
+					<field name="gui_xml" colspan="4" select="0"/>
+					-->
+					<newline/>
+					<field name="application_user" select="0"/>
+					<field name="application_password" select="0"/>
+					<newline/>
+					<!--
+					<field name="activemq_user" select="0"/>
+					<field name="activemq_password" select="0"/>
+					<field name="activemq_url" select="0"/>
+					-->
+					<field name="config_ids"/>
+					<newline/>
+					<field name="graphical_configuration_ids">
+						<tree>
+							<field name="name"/>
+							<field name="mask"/>
+						</tree>
+					</field>
+					<field name="functional_configuration_ids">
+						<tree>
+							<field name="name"/>
+							<field name="mask"/>
+						</tree>
+					</field>
+					<newline/>
+					<field name="description"/>
+				</form>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="view_das_workstation_tree">
+			<field name="name">das.workstation.tree</field>
+			<field name="model">das.workstation</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="das_workstation">
+					<field name="code"/>
+					<field name="name"/>
+					<field name="type_workstation_id"/>
+					<field name="constructor_material_id"/>
+					<field name="ip_id"/>
+					<field name="mac_address"/>
+					<field name="os_id"/>
+					<field name="location"/>
+				</tree>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_das_workstation">
+			<field name="name">Workstations</field>
+			<field name="res_model">das.workstation</field>
+			<field name="view_type">form</field>
+			<field name="view_id" ref="view_das_workstation_tree"/>
+		</record>
+		<menuitem parent="menu_opendas" id="menu_das_workstation" action="action_das_workstation"/>
+
+		<record model="ir.ui.view" id="view_das_config_material_form">
+			<field name="name">das.config.material.form</field>
+			<field name="model">das.config.material</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="das_config_material">
+					<field name="code" select="1"/>
+					<field name="name" select="2"/>
+					<field name="workstation_id" select="1"/>
+					<field name="material_id" select="1"/>
+					<field name="config_type_material_id" select="2"/>
+					<field name="port" select="2"/>
+					<field name="description"/>
+					<!--<field name="transmit_protocol_id" colspan="4">
+						<tree>
+							<field name="type"/>
+							<field name="name"/>
+						</tree>
+						<form>
+							<field name="type"/>
+							<field name="name"/>
+						</form>
+					</field>-->
+				</form>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="view_das_config_material_tree">
+			<field name="name">das.config.material.tree</field>
+			<field name="model">das.config.material</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="das_config_material">
+					<field name="code"/>
+					<field name="name"/>
+					<field name="workstation_id"/>
+					<field name="material_id"/>
+					<field name="config_type_material_id"/>
+					<field name="port"/>
+				</tree>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_das_config_material">
+			<field name="name">Config Materials</field>
+			<field name="res_model">das.config.material</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<menuitem parent="menu_opendas" id="menu_das_config_material" action="action_das_config_material"/>
+	
+	
+		<record model="ir.ui.view" id="view_das_config_type_material_tree">
+			<field name="name">das.config.type.material.tree</field>
+			<field name="model">das.config.type.material</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="das_config_type_material">
+					<field name="code"/>
+					<field name="name"/>
+					<field name="port_type"/>
+					<field name="transmit_protocol_id" />
+					<field name="speed"/>
+					<field name="parity"/>
+					<field name="stop_bit"/>
+					<field name="databit"/>
+					<field name="flow_control"/>
+				</tree>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="view_das_config_type_material_form">
+			<field name="name">das.config.type.material.form</field>
+			<field name="model">das.config.type.material</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="das_config_type_material">
+					<field name="code" colspan="2" />
+					<field name="name"/>
+					<field name="transmit_protocol_id" />
+					<field name="speed" attrs="{'invisible': [('port_type','=','rj45')]}" />
+					<field name="parity" attrs="{'invisible': [('port_type','=','rj45')]}" />
+					<field name="stop_bit" attrs="{'invisible': [('port_type','=','rj45')]} "/>
+					<field name="databit" attrs="{'invisible': [('port_type','=','rj45')]}" />
+					<field name="flow_control" attrs="{'invisible': [('port_type','=','rj45')]}" />
+					<field name="issimple" />
+					<field name="iscumulative" attrs="{'invisible': [('issimple','=','0')]}" />
+					<field name="port_type" />
+					<field name="type_transmit_protocol_line" attrs="{'invisible': [('issimple', '=', 'True') ] }">
+						<tree string="Transmit type protocol">
+							<field name="sequence"/>
+							<field name="type"/>
+							<field name="name"/>
+							<field name="language"/>
+						</tree>
+					</field>
+				</form>
+			</field>
+		</record>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 
+	<record model="ir.ui.view" id="view_das_template_label_form">
+		<field name="name">das_template_label.form</field>
+		<field name="model">das_template_label</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="das_template_label">
+				<field name="product_id" select="1"/>
+				<field name="model_material_id" select="2"/>
+				<field name="label_id" select="0"/>
+
+			</form>
+		</field>
+	</record>
+	<record model="ir.ui.view" id="view_das_template_label_tree">
+		<field name="name">das_template_label.tree</field>
+		<field name="model">das_template_label</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="das_template_label">
+				<field name="product_id"/>
+				<field name="model_material_id"/>
+				<field name="label_id"/>
+
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="action_das_template_label">
+		<field name="name">Template labels</field>
+		<field name="res_model">das_template_label</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+	<menuitem name="OpenDAS/Configuration/Template labels" id="menu_das_template_label" action="action_das_template_label"/>
+
+		
+		
+	<record model="ir.ui.view" id="view_das_workstation_article_form">
+		<field name="name">das_workstation_article.form</field>
+		<field name="model">das_workstation_article</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="das_workstation_article">
+				<field name="workstation_id" select="1"/>
+				<field name="article_id" select="2"/>
+				<field name="page " select="0"/>
+				<field name="position" select="0"/>
+
+			</form>
+		</field>
+	</record>
+	<record model="ir.ui.view" id="view_das_workstation_article_tree">
+		<field name="name">das_workstation_article.tree</field>
+		<field name="model">das_workstation_article</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="das_workstation_article">
+				<field name="workstation_id"/>
+				<field name="article_id"/>
+				<field name="page "/>
+				<field name="position"/>
+
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="action_das_workstation_article">
+		<field name="name">Workstation articles</field>
+		<field name="res_model">das_workstation_article</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+	<menuitem name="OpenDAS/Configuration/Workstation articles" id="menu_das_workstation_article" action="action_das_workstation_article"/>
+
+		
+	<record model="ir.ui.view" id="view_das_workstation_article_form">
+		<field name="name">das_workstation_article.form</field>
+		<field name="model">das_workstation_article</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="das_workstation_article">
+				<field name="workstation_id" select="1"/>
+				<field name="article_id" select="2"/>
+				<field name="page " select="0"/>
+				<field name="position" select="0"/>
+
+			</form>
+		</field>
+	</record>
+	<record model="ir.ui.view" id="view_das_workstation_article_tree">
+		<field name="name">das_workstation_article.tree</field>
+		<field name="model">das_workstation_article</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="das_workstation_article">
+				<field name="workstation_id"/>
+				<field name="article_id"/>
+				<field name="page "/>
+				<field name="position"/>
+
+			</tree>
+		</field>
+	</record>
+	<record model="ir.actions.act_window" id="action_das_workstation_article">
+		<field name="name">Workstation articles</field>
+		<field name="res_model">das_workstation_article</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+	<menuitem name="OpenDAS/Configuration/Workstation articles" id="menu_das_workstation_article" action="action_das_workstation_article"/>
+		
+-->
+		
+
+
+	</data>
+</openerp>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_opendas_ean128_form" model="ir.ui.view">
+            <field name="name">das.ean128.form</field>
+            <field name="model">das.ean128</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="EAN128 Definition">
+                    <field name="code" select="1"/>
+                    <field name="char_variable" select="1"/>
+                    <field name="name" select="1"/>
+                    <field name="fixed_length" select="1"/>
+                    <field name="min_length" select="1"/>
+                    <field name="max_length" select="1"/>
+                    <field name="format" select="1"/>
+				</form>
+            </field>
+        </record>
+        <record id="view_opendas_ean128_tree" model="ir.ui.view">
+            <field name="name">das.ean128.tree</field>
+            <field name="model">das.ean128</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="EAN128 Definition">
+                    <field name="code" select="1"/>
+                    <field name="char_variable" select="1"/>
+                    <field name="name" select="1"/>
+                    <field name="fixed_length" select="2"/>
+                    <field name="min_length" select="2"/>
+                    <field name="max_length" select="2"/>
+                    <field name="format" select="2"/>
+				</tree>
+            </field>
+        </record>
+    </data>
+</openerp>

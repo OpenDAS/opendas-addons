@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_attendance_tree_opendas_1" model="ir.ui.view">
+            <field name="name">hr.attendance.tree.opendas.1</field>
+            <field name="model">hr.attendance</field>
+            <field name="inherit_id" ref="hr_attendance.view_attendance_tree" />
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+               <field name="action_desc" position="before">
+                  	<field name="employee_id"/>
+                  	<field name="object_id"/>
+               </field>
+            </field>
+        </record>
+
+        <record id="view_attendance_who_opendas_1" model="ir.ui.view">
+            <field name="name">hr.attendance.who.tree.opendas.1</field>
+            <field name="model">hr.attendance</field>
+            <field name="inherit_id" ref="hr_attendance.view_attendance_who" />
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+               <field name="action_desc" position="before">
+                  	<field name="employee_id"/>
+                  	<field name="object_id"/>
+               </field>
+            </field>
+        </record>
+        
+        <record id="view_workcenter_form_opendas_inherit" model="ir.ui.view">
+            <field name="name">hr.attendance.form.opendas.inherit</field>
+            <field name="model">hr.attendance</field>
+            <field name="inherit_id" ref="hr_attendance.view_attendance_form" />
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+				<field name="action" position="after">
+					<field name="object_id"/>
+				</field>
+            </field>
+        </record>
+        
+        <record id="view_employee_form_opendas_hr_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.form.opendas.1</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+            	<field name="work_location" position="after">
+                  <field name="workcenter_id"/>
+                  <field name="workcenter_id_current"/>
+                  <field name="workcenter_ids" colspan="4"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_employee_tree_opendas_hr_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.tree.opendas.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_tree" />
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <xpath expr="/tree/field[@name='parent_id']" position="after">
+					<field name="workcenter_id" />
+                    <field name="workcenter_id_current"/>
+				</xpath>
+            </field>
+        </record>        
+    </data>
+</openerp>

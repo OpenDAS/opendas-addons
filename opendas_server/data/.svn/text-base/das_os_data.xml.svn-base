@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+
+<record model="das.os" id="1"><field name="code">1</field><field name="name">Debian</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="2"><field name="code">2</field><field name="name">winVista-64</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="3"><field name="code">3</field><field name="name">winVista</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="4"><field name="code">4</field><field name="name">longhorn-64</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="5"><field name="code">5</field><field name="name">longhorn</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="6"><field name="code">6</field><field name="name">winNetEnterprise-64</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="7"><field name="code">7</field><field name="name">winNetEnterprise</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="8"><field name="code">8</field><field name="name">winNetBusiness</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="9"><field name="code">9</field><field name="name">winNetWeb</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="10"><field name="code">10</field><field name="name">winNetStandard-64</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="11"><field name="code">11</field><field name="name">winNetStandard</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="12"><field name="code">12</field><field name="name">winXPPro-64</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="13"><field name="code">13</field><field name="name">winXPPro</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="14"><field name="code">14</field><field name="name">winXPHome</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="15"><field name="code">15</field><field name="name">win2000AdvServ</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="16"><field name="code">16</field><field name="name">win2000Serv</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="17"><field name="code">17</field><field name="name">win2000Pro</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="18"><field name="code">18</field><field name="name">winNT</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="19"><field name="code">19</field><field name="name">winMe</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="20"><field name="code">20</field><field name="name">win98</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="21"><field name="code">21</field><field name="name">win95</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="22"><field name="code">22</field><field name="name">win31</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="23"><field name="code">23</field><field name="name">dos</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="24"><field name="code">24</field><field name="name">other26xlinux-64</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="25"><field name="code">25</field><field name="name">other26xlinux</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="26"><field name="code">26</field><field name="name">other24xlinux-64</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="27"><field name="code">27</field><field name="name">other24xlinux</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="28"><field name="code">28</field><field name="name">otherlinux-64</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="29"><field name="code">29</field><field name="name">otherlinux</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="30"><field name="code">30</field><field name="name">linux</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="31"><field name="code">31</field><field name="name">rhel4-64 - Redhat Enterprise Linux 4 64-bit</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="32"><field name="code">32</field><field name="name">rhel4 - Redhat Enterprise Linux 4</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="33"><field name="code">33</field><field name="name">rhel3-64 - Redhat Enterprise Linux 3 64-bit</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="34"><field name="code">34</field><field name="name">rhel3 - Redhat Enterprise Linux 3</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="35"><field name="code">35</field><field name="name">rhel2 - edhat Enterprise Linux 2</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="36"><field name="code">36</field><field name="name">redhat - Redhat Linux</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="37"><field name="code">37</field><field name="name">nld9 -  Novell Linux Desktop 9</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="38"><field name="code">38</field><field name="name">sles-64 - SuSE Linux Enterprise Server 64-bit</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="39"><field name="code">39</field><field name="name">sles - SuSE Linux Enterprise Server</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="40"><field name="code">40</field><field name="name">suse-64 - SuSE Linux 64-bit</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="41"><field name="code">41</field><field name="name">suse - SuSE Linux</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="42"><field name="code">42</field><field name="name">ubuntu-64</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="43"><field name="code">43</field><field name="name">ubuntu</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="44"><field name="code">44</field><field name="name">turbolinux</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="45"><field name="code">45</field><field name="name">mandrake</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="46"><field name="code">46</field><field name="name">mandriva-64</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="47"><field name="code">47</field><field name="name">mandriva</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="48"><field name="code">48</field><field name="name">sjds - Sun Java Desktop</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="49"><field name="code">49</field><field name="name">freeBSD-64</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="50"><field name="code">50</field><field name="name">freeBSD</field><field name="freesoftware">1</field></record>
+<record model="das.os" id="51"><field name="code">51</field><field name="name">solaris10-64</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="52"><field name="code">52</field><field name="name">solaris10</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="53"><field name="code">53</field><field name="name">solaris9</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="54"><field name="code">54</field><field name="name">solaris8</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="55"><field name="code">55</field><field name="name">solaris7</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="56"><field name="code">56</field><field name="name">solaris6</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="57"><field name="code">57</field><field name="name">solaris</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="58"><field name="code">58</field><field name="name">netware6</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="59"><field name="code">59</field><field name="name">netware5</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="60"><field name="code">60</field><field name="name">netware4</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="61"><field name="code">61</field><field name="name">netware</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="62"><field name="code">62</field><field name="name">os2experimental</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="63"><field name="code">63</field><field name="name">vmkernel</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="64"><field name="code">64</field><field name="name">darwin</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="65"><field name="code">65</field><field name="name">other-64</field><field name="freesoftware">0</field></record>
+<record model="das.os" id="66"><field name="code">66</field><field name="name">other</field><field name="freesoftware">0</field></record>
+
+	</data>
+</openerp>
+

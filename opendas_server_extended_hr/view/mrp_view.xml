@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_workcenter_form_opendas_inherit_1" model="ir.ui.view">
+            <field name="name">mrp.workcenter.form.opendas.inherit.1</field>
+            <field name="model">mrp.workcenter</field>
+            <field name="inherit_id" ref="mrp.mrp_workcenter_view" />
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+				<field name="code" position="after">
+					<field name="otherid"/>
+				</field>
+            </field>
+        </record>
+        
+        <record id="view_workcenter_form_opendas_inherit_2" model="ir.ui.view">
+            <field name="name">mrp.workcenter.form.opendas.inherit.2</field>
+            <field name="model">mrp.workcenter</field>
+            <field name="inherit_id" ref="mrp.mrp_workcenter_view" />
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+				<field name="active" position="after">
+					<field name="maintenance_costs_account_id" attrs="{'invisible':[('type','!=','hr')]}"/>
+				</field>
+            </field>
+        </record>
+
+       <record id="view_workcenter_form_opendas_inherit_3" model="ir.ui.view">
+            <field name="name">mrp.workcenter.form.opendas.inherit.3</field>
+            <field name="model">mrp.workcenter</field>
+            <field name="inherit_id" ref="mrp.mrp_workcenter_view" />
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+				<xpath expr="/form/notebook/page/field[@name='timesheet_id']" position="after">
+					<field colspan="4" name="employee_pool_ids" attrs="{'invisible':[('type','=','hr')]}"/>
+					<field colspan="4" name="employee_attendance_ids" attrs="{'invisible':[('type','=','hr')]}"/>
+					<field colspan="4" name="employee_ids" attrs="{'invisible':[('type','!=','hr')]}"/>
+					<field colspan="4" name="workcenter_lines" attrs="{'invisible':[('type','=','hr')]}"/>
+					<field colspan="4" name="maintenance_lines" select="2"  attrs="{'invisible':[('type','=','hr')]}"/>
+				</xpath>
+            </field>
+       </record>
+        
+========================================================================================================
+ 		<record id="view_production_form_opendas_inherit" model="ir.ui.view">
+            <field name="name">mrp.production.form.opendas.inherit</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+				<field name="origin" position="after">
+					<field name="production_costs_account_id"/>
+				</field>
+            </field>
+        </record>
+        
+========================================================================================================
+
+	    <record model="ir.ui.view" id="mrp_production_workcenter_form_view_inherit_opendas_inherit">
+	        <field name="name">mrp.production.workcenter.line.form.opendas.inherit</field>
+	        <field name="model">mrp.production.workcenter.line</field>
+	        <field name="inherit_id" ref="mrp_operations.mrp_production_workcenter_form_view_inherit" />
+	        <field name="type">form</field>
+	        <field name="arch" type="xml">
+				<xpath expr="/form/notebook/page/separator[@string='Status']" position="before">
+					<field colspan="4" nolabel="1" name="subwork_ids" select="2" />
+					<field colspan="4" nolabel="1" name="maintenance_lines" select="2" />
+				</xpath>
+	        </field>
+	    </record>
+
+========================================================================================================
+
+		<record model="ir.ui.view" id="mrp_production_workcenter_line_subwork_tree_view">
+	        <field name="name">mrp.production.workcenter.line.subwork.tree</field>
+	        <field name="model">mrp.production.workcenter.line.subwork</field>
+	        <field name="type">tree</field>
+	        <field name="arch" type="xml">
+	            <tree string="Subwork">
+	                <field name="name"/>
+	                <field name="date_start"/>
+	                <field name="date_stop"/>
+	                <field name="qty"/>
+	            </tree>
+	        </field>
+	    </record>
+	
+		<record model="ir.ui.view" id="mrp_production_workcenter_line_subwork_form_view">
+	        <field name="name">mrp.production.workcenter.line.subwork.form</field>
+	        <field name="model">mrp.production.workcenter.line.subwork</field>
+	        <field name="type">form</field>
+	        <field name="arch" type="xml">
+	            <form string="Subwork">
+	                <group col="6" colspan="4">
+	                    <field colspan="4" name="name" select="1"/>
+	                    <field colspan="4" name="workcenter_line_id" select="1"/>
+	                    <field colspan="4" name="date_start"/>
+	                    <field colspan="4" name="date_stop"/>
+	                    <field colspan="4" name="qty"/>
+	                </group>
+	            </form>
+	        </field>
+	    </record>
+	    
+========================================================================================================	 
+   
+		<record model="ir.ui.view" id="mrp_workcenter_maintenance_type_tree_view">
+	        <field name="name">mrp.workcenter.maintenance.type.tree</field>
+	        <field name="model">mrp.workcenter.maintenance.type</field>
+	        <field name="type">tree</field>
+	        <field name="arch" type="xml">
+	            <tree string="Maintenance type">
+	                <field name="name"/>
+	                <field name="code"/>
+	                <field name="maintenance_time"/>
+	            </tree>
+	        </field>
+	    </record>
+	
+		<record model="ir.ui.view" id="mrp_workcenter_maintenance_type_form_view">
+	        <field name="name">mrp.workcenter.maintenance.type.form</field>
+	        <field name="model">mrp.workcenter.maintenance.type</field>
+	        <field name="type">form</field>
+	        <field name="arch" type="xml">
+	            <form string="Maintenance type">
+	                <group col="6" colspan="4">
+		                <field colspan="4" name="name"/>
+		                <field colspan="4" name="code"/>
+		                <field colspan="4" name="maintenance_time"/>
+	                </group>
+	            </form>
+	        </field>
+	    </record>
+	    
+========================================================================================================
+
+		<record model="ir.ui.view" id="mrp_workcenter_maintenance_tree_view">
+	        <field name="name">mrp.workcenter.maintenance.tree</field>
+	        <field name="model">mrp.workcenter.maintenance</field>
+	        <field name="type">tree</field>
+	        <field name="arch" type="xml">
+	            <tree string="Maintenance">
+	                <field name="name"/>
+	                <field colspan="4" name="date_start"/>
+	                <field colspan="4" name="date_stop"/>
+	                <field name="type_id"/>
+	            </tree>
+	        </field>
+	    </record>
+	
+		<record model="ir.ui.view" id="mrp_workcenter_maintenance_form_view">
+	        <field name="name">mrp.workcenter.maintenance.form</field>
+	        <field name="model">mrp.workcenter.maintenance</field>
+	        <field name="type">form</field>
+	        <field name="arch" type="xml">
+	            <form string="Maintenance">
+	                <group col="6" colspan="4">
+		                <field colspan="4" name="name"/>
+		                <field colspan="4" name="date_start"/>
+		                <field colspan="4" name="date_stop"/>
+		                <field colspan="4" name="type_id"/>
+	                </group>
+	            </form>
+	        </field>
+	    </record>
+    
+    </data>
+</openerp>

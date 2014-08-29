@@ -1,0 +1,40 @@
+247,285d246
+< 	### ASPERIENCE ### 
+<     #Permet l'utilisation des codes barres dans les illustrations
+<     def _drawBarcode(self, node):
+<         try:
+<             from reportlab.graphics.barcode import code128
+<             from reportlab.graphics.barcode import code39
+<             from reportlab.graphics.barcode import code93
+<             from reportlab.graphics.barcode import common
+<             from reportlab.graphics.barcode import fourstate
+<             from reportlab.graphics.barcode import usps
+<         except Exception, e:
+<             raise e
+<         args = utils.attr_get(node, [], {'ratio':'float','xdim':'unit','height':'unit','checksum':'int','quiet':'int','width':'unit','stop':'bool','bearers':'int','barWidth':'float','barHeight':'float'})
+<         codes = {
+<             'codabar': lambda a,**x: common.Codabar(a,**x),
+<             'code11': lambda a,**x: common.Code11(a,**x),
+<             'code128': lambda a,**x: code128.Code128(a,**x),
+<             'standard39': lambda a,**x: code39.Standard39(a,**x),
+<             'standard93': lambda a,**x: code93.Standard93(a,**x),
+<             'i2of5': lambda a,**x: common.I2of5(a,**x),
+<             'extended39': lambda a,**x: code39.Extended39(a,**x),
+<             'extended93': lambda a,**x: code93.Extended93(a,**x),
+<             'msi': lambda a,**x: common.MSI(a,**x),
+<             'fim': lambda a,**x: usps.FIM(a,**x),
+<             'postnet': lambda a,**x: usps.POSTNET(a,**x),
+<         }
+<         
+<         code = 'code128'
+<         if node.get('code'):
+<             code = node.get('code').lower()
+< 		#args = {}
+<         for tag in ('width','height','x','y'):
+<             if node.get(tag):
+<                 args[tag] = utils.unit_get(node.get(tag))
+<         
+<         codes[code](self._textual(node), **args).drawOn(self.canvas, utils.unit_get(node.get('x')), utils.unit_get(node.get('y')))
+<         
+<     ### /ASPERIENCE ###
+< 
