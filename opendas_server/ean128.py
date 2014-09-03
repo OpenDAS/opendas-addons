@@ -25,10 +25,12 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #
 ##############################################################################
+import logging
+import logging.handlers
 
-from osv import osv, fields
-import netsvc 
-logger = netsvc.Logger()
+from openerp.osv import osv, fields
+import openerp.netsvc 
+logger = logging.getLogger(__name__)
 class opendas_ean128(osv.osv):
 	"ean128 definition"
 	_name = 'das.ean128'
@@ -51,7 +53,7 @@ class opendas_ean128(osv.osv):
         }
 	def code128(self,chaine):
 		
-		logger.notifyChannel("opendas", netsvc.LOG_DEBUG," ********** Passage par code128 %s %s"%(chaine))
+		logger.notifyChannel("opendas", openerp.netsvc.LOG_DEBUG," ********** Passage par code128 %s %s"%(chaine))
 		
 		import string
 		def testnum(chaine):

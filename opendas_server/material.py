@@ -20,7 +20,7 @@
 #
 ##############################################################################
 
-from osv import osv, fields
+from openerp.osv import osv, fields
 
 def _mask_get(self, cr, uid, context={}):
     obj = self.pool.get('das.mask')

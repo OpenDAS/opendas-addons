@@ -20,8 +20,8 @@
 #
 ##############################################################################
 
-from osv import osv, fields
-from tools.translate import _
+from openerp.osv import osv, fields
+from openerp.tools.translate import _
 
 class das_type_material(osv.osv):
     _name = 'das.type.material'
@@ -66,7 +66,7 @@ class das_type_workstation(osv.osv):
     _columns = {
         'code': fields.char('Type workstation', size=6, required=True),
         'name': fields.char('Name', size=60, required=True),
-#        'description': fields.char('Description', size=255),
+        'description': fields.char('Description', size=255),
     }
 das_type_workstation()
 
