@@ -20,13 +20,13 @@
             <field name="inherit_id" ref="hr_attendance.view_attendance_who" />
             <field name="type">tree</field>
             <field name="arch" type="xml">
-               <field name="action_desc" position="before">
+               <field name="action" position="before">
                   	<field name="employee_id"/>
                   	<field name="object_id"/>
                </field>
             </field>
         </record>
-        
+ 
         <record id="view_workcenter_form_opendas_inherit" model="ir.ui.view">
             <field name="name">hr.attendance.form.opendas.inherit</field>
             <field name="model">hr.attendance</field>

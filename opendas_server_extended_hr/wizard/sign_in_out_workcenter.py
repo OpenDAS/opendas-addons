@@ -19,22 +19,22 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import wizard
-import pooler
+from openerp.osv import fields,osv
+import openerp.pooler
 
-parameter_form_si = '''<?xml version="1.0"?>
-<form string="Event" colspan="4">
-    <field name="employee_id" colspan="4"/>
-    <field name="model"/>
-</form>'''
-
-parameter_fields = {
-    'model' : {'string':"model",'type':'reference', "selection":[('project.project','Project'),('mrp.workcenter','Workcenter'),('mrp.production.workcenter.line','Production'),('mrp.workcenter.maintenance','Maintenance'),('mrp.production.workcenter.line.subwork','Workcenter Line')]},
-    'employee_id': {'string': 'Employee', 'type': 'many2one', 'relation': 'hr.employee', 'required': True},
+class wiz_si_so_wc(osv.osv_memory):
     
-}
-
-class wiz_si_so_wc(wizard.interface):
+    _name = "wiz_si_so_wc"
+    _description = ""
+    
+    _column = {
+        'model': fields.selection((('project.project','Project'),
+                                   ('mrp.workcenter','Workcenter'),
+                                   ('mrp.production.workcenter.line','Production'),
+                                   ('mrp.workcenter.maintenance','Maintenance'),
+                                   ('mrp.production.workcenter.line.subwork','Workcenter Line')),'Model'),
+        'employee_id': fields.many2one('hr.employee','Employee'),
+    }
     
     def _get_defaults(self, cr, uid, data, context):
         if 'ids' in data and data['ids']:
@@ -63,23 +63,23 @@ class wiz_si_so_wc(wizard.interface):
         pooler.get_pool(cr.dbname).get('hr.employee').work_change(cr,uid,data['form']['employee_id'],{"model":model , "id":id})
         return {}
     
-    states = {
+    '''states = {
         'init' : {
                 'actions' : [],
                 'result' : {'type' : 'choice', 'next_state': _state_check}
         },
         'si': {
             'actions': [_get_defaults],
-            'result': {'type': 'form', 'arch':parameter_form_si, 'fields': parameter_fields, 'state':[('done', 'Ok'),('end','Cancel')]}
+            'result': {'type': 'form', 'arch':parameter_form_si, 'osv.fields': parameter_fields, 'state':[('done', 'Ok'),('end','Cancel')]}
         },
         'done': {
             'actions': [_sign],
             'result': {'type' : 'state', 'state':'init'}
         },
 
-    }
-wiz_si_so_wc('si_so_wc')
-
+    }'''
+#wiz_si_so_wc('si_so_wc')
+wiz_si_so_wc()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

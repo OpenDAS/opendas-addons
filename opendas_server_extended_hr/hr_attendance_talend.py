@@ -19,10 +19,12 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import netsvc
-from osv import osv
-from tools.translate import _
-logger = netsvc.Logger()
+import openerp.netsvc
+from openerp.osv import osv
+from openerp.tools.translate import _
+import logging
+import logging.handlers
+logger = logging.getLogger(__name__)
 
 class hr_attendance(osv.osv):
     _inherit = "hr.attendance"
@@ -37,7 +39,7 @@ class hr_employee(osv.osv):
         return self.talend_get_employees_uid(cr, uid, context, filter)
         
     def talend_get_employees_uid(self, cr, uid, context, filter):
-        logger.notifyChannel("opendas", netsvc.LOG_DEBUG,"talend_get_employees")
+        logger.debug("opendas : talend_get_employees")
         result = []
         
         for this in self.browse(cr,uid,self.search(cr,uid,filter)):
@@ -49,7 +51,7 @@ class hr_employee(osv.osv):
         return self.talend_get_employees(cr, uid, context, filter)
 
     def talend_get_employees(self, cr, uid, context, filter):
-        logger.notifyChannel("opendas", netsvc.LOG_DEBUG,"talend_get_employees")
+        logger.debug("opendas : talend_get_employees")
         result = []
         key = "EMPL"
         
@@ -62,7 +64,7 @@ class hr_employee(osv.osv):
         return self.talend_get_employees_present(cr, uid, context, filter)
 
     def talend_get_employees_present(self, cr, uid, context, filter):
-        logger.notifyChannel("opendas", netsvc.LOG_DEBUG,"talend_get_employees_present")
+        logger.debug("opendas : talend_get_employees_present")
         result = []
         key = "EMPL"
         
@@ -75,7 +77,7 @@ class hr_employee(osv.osv):
         return self.talend_get_employees_absent(cr, uid, context, filter)
 
     def talend_get_employees_absent(self, cr, uid, context, filter):
-        logger.notifyChannel("opendas", netsvc.LOG_DEBUG,"talend_get_employees_absent")
+        logger.debug("opendas : talend_get_employees_absent")
         result = []
         key = "EMPL"
         
@@ -89,7 +91,7 @@ class hr_employee(osv.osv):
         return self.talend_get_active_employee_pool_in_workcenter(cr, uid, context, filter)
 
     def talend_get_active_employee_pool_in_workcenter(self, cr, uid, context, filter):
-        logger.notifyChannel("opendas", netsvc.LOG_DEBUG,"talend_get_active_employee_pool_in_workcenter")
+        logger.debug("opendas : talend_get_active_employee_pool_in_workcenter")
         result = []
         key = "EMPL"
         
@@ -112,7 +114,7 @@ class hr_employee(osv.osv):
         return self.talend_get_active_employee_pool_in_workcenter_not_in(cr, uid, context, filter)
     
     def talend_get_active_employee_pool_in_workcenter_not_in(self, cr, uid, context, filter):
-        logger.notifyChannel("opendas", netsvc.LOG_DEBUG,"talend_get_active_employee_pool_in_workcenter_not_in")
+        logger.debug("opendas : talend_get_active_employee_pool_in_workcenter_not_in")
         result = []
         key = "EMPL"
         
@@ -140,7 +142,7 @@ class hr_employee(osv.osv):
         return self.talend_get_workcenters(cr, uid, context, filter)
     
     def talend_get_workcenters(self, cr, uid, context, filter):
-        logger.notifyChannel("opendas", netsvc.LOG_DEBUG,"talend_get_workcenters")
+        logger.debug("opendas : talend_get_workcenters")
         result = []
         workcenter_obj = self.pool.get('mrp.workcenter')
         for this in workcenter_obj.browse(cr,uid,workcenter_obj.search(cr,uid,filter)):
@@ -148,7 +150,7 @@ class hr_employee(osv.osv):
         return {"code":0,"string":_("OK"),"object":result}
     
     def talend_get_workcenter_in(self, cr, uid, context, filter):
-        logger.notifyChannel("opendas", netsvc.LOG_DEBUG,"talend_get_workcenter_in")
+        logger.debug("opendas : talend_get_workcenter_in")
         result = []
         key = "EMPL"
 
@@ -180,7 +182,7 @@ class hr_employee(osv.osv):
         return {"code":0,"string":_("OK"),"object":result}
     
     def talend_get_workcenter_out(self, cr, uid, context, filter):
-        logger.notifyChannel("opendas", netsvc.LOG_DEBUG,"talend_get_workcenter_out")
+        logger.debug("opendas : talend_get_workcenter_out")
         result = []
         key = "EMPL"
 
@@ -212,7 +214,7 @@ class hr_employee(osv.osv):
         return {"code":0,"string":_("OK"),"object":result}
     
     def talend_get_workcenter_line(self, cr, uid, context, filter):
-        logger.notifyChannel("opendas", netsvc.LOG_DEBUG,"talend_get_workcenter_line")
+        logger.debug("opendas : talend_get_workcenter_line")
         result = []
         
         if 'workcenter' in context and context['workcenter'] :
@@ -230,7 +232,7 @@ class hr_employee(osv.osv):
         return {"code":0,"string":_("OK"),"object":result}
     
     def talend_get_groups_by_employee(self, cr, uid, context, filter):
-        logger.notifyChannel("opendas", netsvc.LOG_DEBUG,"talend_get_groups_by_employee")        
+        logger.debug("opendas : talend_get_groups_by_employee")        
         key = "EMPL"
         if 'employee' not in context :
             return {"code":2,"string":_("Error, employee not in context"),"object":[]}
@@ -271,7 +273,7 @@ class hr_employee(osv.osv):
         return {"code":0,"string":_("OK"),"object":result}
         
     def talend_in_out(self, cr, uid, context, filter):
-        logger.notifyChannel("opendas", netsvc.LOG_DEBUG,"talend_in_out")
+        logger.debug("opendas : talend_in_out")
 
         if 'employee' not in context :
             return {"code":2,"string":_("Error, employee not in context"),"object":[]}
@@ -295,7 +297,7 @@ class hr_employee(osv.osv):
         return {"code":0,"string":result,"object":[]}
     
     def talend_in_out_barre(self, cr, uid, context, filter):
-        logger.notifyChannel("opendas", netsvc.LOG_DEBUG,"talend_in_out_barre")
+        logger.debug("opendas : talend_in_out_barre")
         key = "EMPL"
 
         if 'employee' not in context :
@@ -338,7 +340,7 @@ class hr_employee(osv.osv):
         return self.talend_login_workcenter(cr, uid, context, filter)
     
     def talend_login_workcenter(self, cr, uid, context, filter):
-        logger.notifyChannel("opendas", netsvc.LOG_DEBUG,"talend_login_workcenter")
+        logger.debug("opendas : talend_login_workcenter")
         print context
         print filter
         key = "EMPL"
@@ -378,7 +380,7 @@ class hr_employee(osv.osv):
         return {"code":0,"string":result,"object":[]}
      
     def talend_change_workcenter_barre(self, cr, uid, context, filter):
-        logger.notifyChannel("opendas", netsvc.LOG_DEBUG,"talend_change_workcenter_barre")
+        logger.debug("opendas : talend_change_workcenter_barre")
         key = "EMPL"
 
         if 'employee' not in context :
@@ -415,7 +417,7 @@ class hr_employee(osv.osv):
         return {"code":0,"string":result,"object":[]}
     
     def talend_change_workcenter_line_barre(self, cr, uid, context, filter):
-        logger.notifyChannel("opendas", netsvc.LOG_DEBUG,"talend_change_workcenter_line_barre")
+        logger.debug("opendas : talend_change_workcenter_line_barre")
         key = "EMPL"
 
         if 'employee' not in context :
@@ -457,7 +459,7 @@ class hr_employee(osv.osv):
         return {"code":0,"string":result,"object":[]}
     
     def talend_change_workcenter(self, cr, uid, context, filter):
-        logger.notifyChannel("opendas", netsvc.LOG_DEBUG,"talend_change_workcenter")
+        logger.debug("opendas : talend_change_workcenter")
         
         if 'employee' not in context :
             return {"code":2,"string":_("Error, employee not in context"),"object":[]}
@@ -478,7 +480,7 @@ class hr_employee(osv.osv):
         return {"code":0,"string":result,"object":[]}
     
     def talend_change_workcenter_line(self, cr, uid, context, filter):
-        logger.notifyChannel("opendas", netsvc.LOG_DEBUG,"talend_change_workcenter_line")
+        logger.debug("opendas : talend_change_workcenter_line")
 
         if 'employee' not in context :
             return {"code":2,"string":_("Error, employee not in context"),"object":[]}
@@ -504,7 +506,8 @@ class hr_employee(osv.osv):
         return {"code":0,"string":result,"object":[]}
     
     def talend_maintenance(self, cr, uid, context, filter):
-        logger.notifyChannel("opendas", netsvc.LOG_DEBUG,"talend_maintenance")
+        logger.debug("opendas : talend_maintenance")
+
 
         if 'employee' not in context :
             return {"code":2,"string":_("Error, employee not in context"),"object":[]}
@@ -550,7 +553,7 @@ class hr_employee(osv.osv):
         return {"code":0,"string":result,"object":[]}
     
     def talend_controle_iso(self, cr, uid, context, filter):
-        logger.notifyChannel("opendas", netsvc.LOG_DEBUG,"talend_controle_iso")
+        logger.debug("opendas : talend_controle_iso")
 
         if 'employee' not in context :
             return {"code":2,"string":_("Error, employee not in context"),"object":[]}

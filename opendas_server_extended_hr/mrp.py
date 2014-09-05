@@ -19,13 +19,17 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from osv import fields
-from osv import osv
+from openerp.osv import fields
+from openerp.osv import osv
 
-import netsvc
-from tools.translate import _
+import logging
+import logging.handlers
+
+import openerp.netsvc
+from openerp.tools.translate import _
 import datetime
-logger = netsvc.Logger()
+
+logger = logging.getLogger(__name__)
 
 class mrp_production(osv.osv):
     _inherit = "mrp.production"
@@ -34,7 +38,7 @@ class mrp_production(osv.osv):
     }
     
     def talend_get_mrp_production(self, cr, uid, context, filter):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"talend_get_mrp_production")
+        logger.debug("opendas hr : talend_get_mrp_production")
         result = []
         temp = {}
         
@@ -60,7 +64,7 @@ class mrp_production_product_line(osv.osv):
     }
     
     def talend_get_mrp_production_product_line(self, cr, uid, context, filter):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"talend_get_mrp_production_product_line")
+        logger.debug("opendas hr : talend_get_mrp_production_product_line")
         result = []
         temp = {}
         
@@ -80,7 +84,7 @@ class mrp_production_product_line(osv.osv):
         return {"code":0,"string":_("OK"),"object":result}
     
     def talend_synchro_mrp_production_product_line(self, cr, uid, context, filter):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"talend_synchro_mrp_production_product_line")
+        logger.debug("opendas hr : talend_synchro_mrp_production_product_line")
   
         if 'id' not in context :
             return {"code":2,"string":_("Error, production product line not in context"),"object":[]}
@@ -145,7 +149,7 @@ class mrp_workcenter(osv.osv):
     _inherit = "mrp.workcenter"
     
     def _get_employee_ids(self, cr, uid, ids, name, arg, context=None):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"mrp workcenter _get_employee_ids")
+        logger.debug("opendas hr : mrp workcenter _get_employee_ids")
         res = {}
         employee_obj = self.pool.get('hr.employee')
         employee_ids = employee_obj.search(cr,uid,[])
@@ -174,7 +178,7 @@ class mrp_workcenter(osv.osv):
     #Quand on est sur une machine, on est soit sur une maintenance, soit sur une production
     
     def lost_time(self, cr, uid, ids, context={}):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"mrp workcenter lost_time")
+        logger.debug("opendas hr : mrp workcenter lost_time")
         employee = self.pool.get('hr.employee').browse(cr,uid,context['employee'])
         for i in self.browse(cr,uid,ids):
             print i,ids
@@ -191,11 +195,11 @@ class mrp_workcenter(osv.osv):
             self.pool.get('account.analytic.line').create(cr, uid, vals)
          
     def sign_in(self, cr, uid, ids, context={}):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"mrp workcenter sign_in")
+        logger.debug("opendas hr : mrp workcenter sign_in")
         print "----> sign_in mrp_workcenter",context
     
     def sign_out(self, cr, uid, ids, context={}):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"mrp workcenter sign_out")
+        logger.debug("opendas hr : mrp workcenter sign_out")
         print "----> sign_out mrp_workcenter",context,ids
         for i in self.browse(cr, uid, ids):
             if i.costs_journal_id and i.costs_general_account_id:
@@ -223,7 +227,7 @@ class mrp_production_workcenter_line(osv.osv):
     }
     
     def lost_time(self, cr, uid, ids, context={}):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"mrp_production_workcenter_line lost_time")
+        logger.debug("opendas hr : mrp_production_workcenter_line lost_time")
         employee = self.pool.get('hr.employee').browse(cr,uid,context['employee'])
         for i in self.browse(cr,uid,ids):
             code = i.name or ""
@@ -239,9 +243,9 @@ class mrp_production_workcenter_line(osv.osv):
             self.pool.get('account.analytic.line').create(cr, uid, vals)
         
     def sign_in(self, cr, uid, ids, context={}):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"mrp_production_workcenter_line sign_in")
+        logger.debug("opendas hr : mrp_production_workcenter_line sign_in")
         print "----> sign_in mrp_production_workcenter_line",context
-        wf_service = netsvc.LocalService('workflow')
+        wf_service = openerp.netsvc.LocalService('workflow')
         for i in self.browse(cr, uid, ids):
             if i.state in ("draft","startworking"):
                 wf_service.trg_validate(uid, 'mrp.production.workcenter.line', i.id, 'button_start_working', cr)
@@ -249,11 +253,12 @@ class mrp_production_workcenter_line(osv.osv):
                 wf_service.trg_validate(uid, 'mrp.production.workcenter.line', i.id, 'button_resume', cr)
     
     def sign_out(self, cr, uid, ids, context={}):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"mrp_production_workcenter_line sign_out")
+        logger.debug("opendas hr : mrp_production_workcenter_line sign_out")
+        
         print "----> sign_out mrp_production_workcenter_line",context
         
         employee = self.pool.get('hr.employee').browse(cr,uid,context['employee'])
-        wf_service = netsvc.LocalService('workflow')
+        wf_service = openerp.netsvc.LocalService('workflow')
         for i in self.browse(cr, uid, ids):
             vals = {
                 'name': i.name+_('(WKC)'),
@@ -302,7 +307,7 @@ class mrp_production_workcenter_line_subwork(osv.osv):
     }
     
     def lost_time(self, cr, uid, ids, context={}):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"mrp_production_workcenter_line_subwork lost_time")
+        logger.debug("opendas hr : mrp_production_workcenter_line_subwork lost_time")
         print "----> lost_time mrp.production.workcenter.line.subwork",context
         employee = self.pool.get('hr.employee').browse(cr,uid,context['employee'])
         for i in self.browse(cr,uid,ids):
@@ -318,12 +323,12 @@ class mrp_production_workcenter_line_subwork(osv.osv):
             self.pool.get('account.analytic.line').create(cr, uid, vals)
             
     def sign_in(self, cr, uid, ids, context={}):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"mrp_production_workcenter_line_subwork sign_in")
+        logger.debug("opendas hr : mrp_production_workcenter_line_subwork sign_in")
         print "----> sign_in mrp_production_workcenter_line_subwork",context
         self.write(cr,uid,ids,{'date_start':datetime.datetime.now()})
     
     def sign_out(self, cr, uid, ids, context={}):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"mrp_production_workcenter_line_subwork sign_out")
+        logger.debug("opendas hr : mrp_production_workcenter_line_subwork sign_out")        
         print "----> sign_out mrp_production_workcenter_line_subwork",context
         self.write(cr,uid,ids,{'date_stop':datetime.datetime.now()})
     
@@ -351,7 +356,7 @@ class mrp_workcenter_maintenance(osv.osv):
     }
     
     def sign_in(self, cr, uid, ids, context={}):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"mrp_workcenter_maintenance sign_in")
+        logger.debug("opendas hr : mrp_workcenter_maintenance sign_in")
         if 'tps' in context and context['tps'] and context['tps']!= 0:
             start = datetime.datetime.now()
             stop = start + datetime.timedelta(seconds=context['tps']*60)
@@ -372,7 +377,7 @@ class mrp_workcenter_maintenance(osv.osv):
         
     
     def sign_out(self, cr, uid, ids, context={}):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"mrp_workcenter_maintenance sign_out")
+        logger.debug("opendas hr : mrp_workcenter_maintenance sign_out")
         employee = self.pool.get('hr.employee').browse(cr,uid,context['employee'])
         for i in self.browse(cr, uid, ids):
             if i.id_cron and i.id_cron.active :

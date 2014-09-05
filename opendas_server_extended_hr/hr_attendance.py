@@ -21,11 +21,14 @@
 ##############################################################################
 import datetime
 import time
-import netsvc
-from osv import fields, osv
-from tools.translate import _
-from tools import ustr
-logger = netsvc.Logger()
+import openerp.netsvc
+import logging
+import logging.handlers
+from openerp.osv import fields, osv
+from openerp.tools.translate import _
+from openerp.tools import ustr
+
+logger = logging.getLogger(__name__)
 
 class hr_attendance(osv.osv):
     _inherit = "hr.attendance"
@@ -34,7 +37,8 @@ class hr_attendance(osv.osv):
     }
     
     def _altern_si_so(self, cr, uid, ids):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"_altern_si_so")
+        logger.debug("opendas hr : _altern_si_so")
+
         for emp_id in ids:
             sql = '''
             select action, name
@@ -60,7 +64,7 @@ class hr_employee(osv.osv):
     _inherit = "hr.employee"
     
     def _state(self, cr, uid, ids, name, args, context={}):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"_state")
+        logger.debug("opendas hr : _state")
         result = {}
         for id in ids:
             result[id] = 'absent'
@@ -82,7 +86,7 @@ class hr_employee(osv.osv):
         return result
 
     def _get_workcenter(self, cr, uid, ids, field_name, arg, context={}):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"_get_workcenter")
+        logger.debug("opendas hr : _get_workcenter")
         all_emp_actions = self.pool.get('hr.employee').get_action(cr,uid,ids)
         result = {}
         for emp_id in ids:
@@ -101,20 +105,19 @@ class hr_employee(osv.osv):
     }
     
     def _action_check(self, cr, uid, emp_id, dt=False,context={}):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"_action_check")
+        logger.debug("opendas hr : _action_check")
         cr.execute('select max(name) from hr_attendance where employee_id=%s', (emp_id,))
         res = cr.fetchone()
         return True or not (res and (res[0]>=(dt or time.strftime('%Y-%m-%d %H:%M:%S'))))
     
     def work_change(self, cr, uid, ids, context={}):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"work_change")
-
+        logger.debug("opendas hr : work_change")
         # TODO all_emp_action doit être rechargé après chaque fin de récursion
         if ids and not isinstance(ids,list):
             ids = [ids]
         result = u""
         context_sauv = context.copy()
-        wf_service = netsvc.LocalService('workflow')
+        wf_service = openerp.netsvc.LocalService('workflow')
         
         if "action_after" in context :
             del context["action_after"]
@@ -500,7 +503,7 @@ class hr_employee(osv.osv):
         return result
         
     def get_action(self, cr, uid, ids, context={}):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"get_action")
+        logger.debug("opendas hr : get_action")
         result = {}
         if ids == [] :
             return result
@@ -524,7 +527,7 @@ class hr_employee(osv.osv):
         return result
     
     def get_time_delta(self, cr, uid, ids, context={}):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"get_time_delta")
+        logger.debug("opendas hr : get_time_delta")
         result = {}
         if 'model' in context and 'id' in context :
             object_id = context['model']+','+str(context['id'])
@@ -559,7 +562,7 @@ class hr_employee(osv.osv):
         return result
 
     def get_last_delta(self, cr, uid, ids, context={}):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"get_last_delta")
+        logger.debug("opendas hr : get_last_delta")
         result = {}
         for emp in self.browse(cr, uid, ids):
             cr.execute("SELECT name,object_id\
@@ -589,7 +592,7 @@ class hr_employee(osv.osv):
         return result
     
     def lost_time(self, cr, uid, ids, context={}):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"lost_time")
+        logger.debug("opendas hr : lost_time")
         employee = self.pool.get('hr.employee').browse(cr,uid,context['employee'])
         if employee.workcenter_id:
             vals = {
@@ -603,10 +606,10 @@ class hr_employee(osv.osv):
             }
             self.pool.get('account.analytic.line').create(cr, uid, vals)
         else:
-            logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG, 'workcenter was not found')
+            logger.debug("opendas hr : workcenter was not found")
 
     def sign_in(self, cr, uid, ids, context={}, dt=False, *args):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"sign_in")
+        logger.debug("opendas hr : sign_in")
         """
         Temps d'entrée arrondi à special_resolution
         """
@@ -637,7 +640,7 @@ class hr_employee(osv.osv):
         return id
        
     def sign_out(self, cr, uid, ids, context={}, dt=False, *args):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"sign_out")
+        logger.debug("opendas hr : sign_out")
         """
         Temps de sortie arrondi à special_resolution
         """
@@ -690,7 +693,7 @@ class hr_employee(osv.osv):
         return id
     
     def sign_in_action(self, cr, uid, ids, context={}, dt=False, *args):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"sign_in_action")
+        logger.debug("opendas hr : sign_in_action")
         object_id = context['model']+','+str(context['id'])
         print object_id
         result = {}
@@ -702,7 +705,7 @@ class hr_employee(osv.osv):
         return result
     
     def sign_out_action(self, cr, uid, ids, context={}, dt=False, *args):
-        logger.notifyChannel("opendas hr", netsvc.LOG_DEBUG,"sign_out_action")
+        logger.debug("opendas hr : sign_out_action")
         object_id = context['model']+','+str(context['id'])
         print object_id
         result = {}

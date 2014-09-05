@@ -34,7 +34,7 @@ parameter_fields = {
     
 }
 
-class wiz_si_so_wc(wizard.interface):
+class wiz_si_so_wc(osv.osv_memeory):
     
     def _get_defaults(self, cr, uid, data, context):
         if 'ids' in data and data['ids']:

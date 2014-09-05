@@ -20,16 +20,20 @@
 #
 ##############################################################################
 
-import netsvc
-from report import report_sxw
-from osv import osv
+import openerp.netsvc
+from openerp.report import report_sxw
+from openerp.osv import osv
 import time
-from tools.translate import _
-from tools import ustr
-logger = netsvc.Logger()
+from openerp.tools.translate import _
+from openerp.tools import ustr
+import logging
+import logging.handlers
+logger = logging.getLogger(__name__)
+
 
 class badges(report_sxw.rml_parse):
-        
+
+      
     def __init__(self, cr, uid, name, context):
         super(badges, self).__init__(cr, uid, name, context=context)
 
@@ -38,7 +42,7 @@ class badges(report_sxw.rml_parse):
         })
         self.context = context
         
-report_sxw.report_sxw('report.hr.employee.badges','hr.employee','addons/opendas_server_extended_hr/report/badges.rml',parser=badges)
+#report_sxw.report_sxw('report.hr.employee.badges','hr.employee','addons/opendas_server_extended_hr/report/badges.rml',parser=badges)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

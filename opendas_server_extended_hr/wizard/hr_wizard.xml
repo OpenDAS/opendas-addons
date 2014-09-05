@@ -1,7 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <wizard id="si_so_wc" model="hr.employee" name="si_so_wc" string="Sign in / Sign out by object"/>
+<!--         <wizard id="si_so_wc" model="hr.employee" name="si_so_wc" string="Sign in / Sign out by object"/> -->
         <menuitem action="si_so_wc"  id="menu_si_so_wc" parent="hr_attendance.menu_hr_attendance" type="wizard"/>
+    	<!--<menuitem action="view_wiz_si_so_wc_form_action"  id="menu_si_so_wc_form" parent="hr_attendance.menu_hr_attendance" />  -->
     </data>
+   <data>
+		<record id="view_wiz_si_so_wc_form" model="ir.ui.view">
+			<field name="name">opendas_server_extended_hr.wiz_si_so_wc.form</field>
+			<field name="model">opendas_server_extended_hr.wiz_si_so_wc</field>
+			<field name="priority" eval="2"/>
+			<field name="arch" type="xml">
+				<form string="Event" colspan="4">
+		    		<field name="employee_id" colspan="4"/>
+		    		<field name="model"/>
+				</form>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="view_wiz_si_so_wc_form_action">
+		    <field name="name">wiz_si_so_wc.form.action</field>
+		    <field name="res_model">wiz_si_so_wc</field>
+		    <field name="view_type">form</field>
+		    <field name="view_mode">form</field>
+		    <field name="view_id" ref="view_wiz_si_so_wc_form"/>
+		</record>
+	</data>
+	  
 </openerp>
+
+	
+
+

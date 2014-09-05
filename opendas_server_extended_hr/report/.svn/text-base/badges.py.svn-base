@@ -20,13 +20,13 @@
 #
 ##############################################################################
 
-import netsvc
+import openerp.netsvc
 from report import report_sxw
-from osv import osv
+from openerp.osv import osv
 import time
-from tools.translate import _
-from tools import ustr
-logger = netsvc.Logger()
+from openerp.tools.translate import _
+from openerp.tools import ustr
+logger = logging.getLogger(__name__)
 
 class badges(report_sxw.rml_parse):
         
