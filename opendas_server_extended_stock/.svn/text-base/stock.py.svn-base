@@ -27,7 +27,7 @@
 ##############################################################################
 from mx import DateTime
 import time
-import netsvc
+import openerp.netsvc
 from osv import fields, osv
 from tools import config
 from tools.translate import _
