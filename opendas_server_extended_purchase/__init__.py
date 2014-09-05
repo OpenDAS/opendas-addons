@@ -1,2 +1,2 @@
 import purchase
-import wizard
+#import wizard
