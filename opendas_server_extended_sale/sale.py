@@ -27,11 +27,11 @@
 ##############################################################################
 from mx import DateTime
 import time
-import netsvc
-from osv import fields, osv
-from tools import config
-from tools.translate import _
-import tools
+import openerp.netsvc
+from openerp.osv import fields, osv
+from openerp.tools import config
+from openerp.tools.translate import _
+import openerp.tools
 import datetime
 import base64
 
@@ -58,4 +58,3 @@ class sale_order(osv.osv):
         return {"code":0,"string":_("OK"),"object":result}
 
 sale_order()
-
