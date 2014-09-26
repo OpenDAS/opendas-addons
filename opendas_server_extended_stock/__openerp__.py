@@ -1,6 +1,6 @@
 {
 		"name" : "OpenDAS Server Extended functions stock",
-		"version" : "0.1",
+		"version" : "0.2",
 		"author" : "OpenDAS",
 		"website" : "http://www.opendas.org",
 		"category" : "OpenDAS",

@@ -2,6 +2,7 @@
 <openerp>
 <data>
     <menuitem id="menu_opendas" name="OpenDAS"/>
+    <menuitem id="menu_data" name="Data" parent="menu_opendas" sequence="0"/>
     <menuitem id="menu_configuration" name="Configuration" parent="menu_opendas" sequence="0"/>
 
     <record model="ir.ui.view" id="view_das_os_form">
@@ -38,7 +39,7 @@
         <field name="view_type">form</field>
         <field name="view_id" ref="view_das_os_tree"/>
     </record>
-    <menuitem parent="menu_configuration" id="menu_action_das_os" action="action_das_os"/>
+    <menuitem parent="menu_data" id="menu_action_das_os" action="action_das_os"/>
 
 </data>
 </openerp>

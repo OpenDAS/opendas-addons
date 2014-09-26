@@ -53,7 +53,7 @@
 		<field name="view_type">form</field>
 		<field name="view_mode">tree,form</field>
 	</record>
-	<menuitem parent="menu_configuration" id="menu_das_data_model" action="action_das_data_model"/>
+	<menuitem parent="menu_data" id="menu_das_data_model" action="action_das_data_model"/>
 
 	<record model="ir.ui.view" id="view_das_generic_form">
 		<field name="name">das.generic.form</field>
@@ -94,7 +94,7 @@
 		<field name="view_type">form</field>
 		<field name="view_mode">tree,form</field>
 	</record>
-	<menuitem parent="menu_configuration" id="menu_das_generic" action="action_das_generic"/>
+	<menuitem parent="menu_data" id="menu_das_generic" action="action_das_generic"/>
 		
 	<record model="ir.ui.view" id="view_das_consumer_config_form">
 		<field name="name">das.consumer.config.form</field>
@@ -125,8 +125,10 @@
 		<field name="view_type">form</field>
 		<field name="view_id" ref="view_das_consumer_config_tree"/>
 	</record>
-	<menuitem parent="menu_configuration" id="menu_das_consumer_config" action="action_das_consumer_config"/><!--
-		
+	<menuitem parent="menu_configuration" id="menu_das_consumer_config" action="action_das_consumer_config"/>
+	
+	<!--
+	
 	<record model="ir.ui.view" id="view_das_code_dependency_form">
 		<field name="name">das.code.dependency.form</field>
 		<field name="model">das.code.dependency</field>

@@ -32,7 +32,7 @@
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
 		</record>
-		<menuitem parent="menu_configuration" id="menu_das_type_material" action="action_das_type_material"/>
+		<menuitem parent="menu_data" id="menu_das_type_material" action="action_das_type_material"/>
 				
 		<record model="ir.ui.view" id="view_das_model_material_form">
 			<field name="name">das.model.material.form</field>
@@ -67,7 +67,7 @@
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
 		</record>
-		<menuitem parent="menu_configuration" id="menu_das_model_material" action="action_das_model_material"/>
+		<menuitem parent="menu_data" id="menu_das_model_material" action="action_das_model_material"/>
 
 		<record model="ir.ui.view" id="view_das_acquisition_method_form">
 			<field name="name">das.acquisition.method.form</field>
@@ -131,7 +131,7 @@
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
 		</record>
-		<menuitem parent="menu_configuration" id="menu_das_type_workstation" action="action_das_type_workstation"/>
+		<menuitem parent="menu_data" id="menu_das_type_workstation" action="action_das_type_workstation"/>
 
 		<record model="ir.ui.view" id="view_das_transmit_protocol_form">
 			<field name="name">das.transmit.protocol.form</field>
@@ -165,7 +165,7 @@
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
 		</record>
-		<menuitem parent="menu_configuration" id="menu_das_transmit_protocol" action="action_das_transmit_protocol"/>
+		<menuitem parent="menu_data" id="menu_das_transmit_protocol" action="action_das_transmit_protocol"/>
 
 		<!-- TODO: das.config.type.material -->
 		<!-- TODO: das.dialog

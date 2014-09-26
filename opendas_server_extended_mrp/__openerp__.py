@@ -1,6 +1,6 @@
 {
 		"name" : "OpenDAS Server Extended functions mrp",
-		"version" : "0.1",
+		"version" : "0.2",
 		"author" : "OpenDAS",
 		"website" : "http://www.opendas.org",
 		"category" : "OpenDAS",
@@ -10,7 +10,6 @@
 					 ],
 		"init_xml" : [ ],
 		"demo_xml" : [ ],
-		"update_xml" : [
-                        ],
+		"update_xml" : [ ],
 		"installable": True
 }

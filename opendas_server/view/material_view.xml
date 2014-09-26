@@ -31,7 +31,7 @@
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
 		</record>
-		<menuitem parent="menu_opendas" id="menu_model_material" action="action_das_material"/>
+		<menuitem parent="menu_data" id="menu_model_material" action="action_das_material"/>
 
 		<record model="ir.ui.view" id="view_das_mask_form">
 			<field name="name">das.mask.form</field>
@@ -63,7 +63,7 @@
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
 		</record>
-		<menuitem parent="menu_opendas" id="menu_model_mask" action="action_das_mask"/>
+		<menuitem parent="menu_data" id="menu_model_mask" action="action_das_mask"/>
 
 		<record model="ir.ui.view" id="view_das_graphical_configuration_form">
 			<field name="name">das.graphical.configuration.form</field>
@@ -94,7 +94,7 @@
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
 		</record>
-		<menuitem parent="menu_opendas" id="menu_das_graphical_configuration" action="action_das_graphical_configuration"/>
+		<menuitem parent="menu_configuration" id="menu_das_graphical_configuration" action="action_das_graphical_configuration"/>
 			
 		<record model="ir.ui.view" id="view_das_functional_configuration_form">
 			<field name="name">das.functional.configuration.form</field>
@@ -131,7 +131,7 @@
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
 		</record>
-		<menuitem parent="menu_opendas" id="menu_das_functional_configuration" action="action_das_functional_configuration"/>
+		<menuitem parent="menu_configuration" id="menu_das_functional_configuration" action="action_das_functional_configuration"/>
 
 		<record model="ir.ui.view" id="view_das_workstation_form">
 			<field name="name">das.workstation.form</field>
@@ -212,12 +212,12 @@
 			<field name="view_type">form</field>
 			<field name="view_id" ref="view_das_workstation_tree"/>
 		</record>
-		<menuitem parent="menu_opendas" id="menu_das_workstation" action="action_das_workstation"/>
+		<menuitem parent="menu_data" id="menu_das_workstation" action="action_das_workstation"/>
 
 		<record model="ir.ui.view" id="view_das_config_material_form">
 			<field name="name">das.config.material.form</field>
 			<field name="model">das.config.material</field>
-			<field name="type">form</field>
+			<field name="mode">primary</field>
 			<field name="arch" type="xml">
 				<form string="das_config_material">
 					<field name="code" select="1"/>
@@ -261,8 +261,7 @@
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
 		</record>
-		<menuitem parent="menu_opendas" id="menu_das_config_material" action="action_das_config_material"/>
-	
+		<menuitem parent="menu_configuration" id="menu_das_config_material" action="action_das_config_material"/>
 	
 		<record model="ir.ui.view" id="view_das_config_type_material_tree">
 			<field name="name">das.config.type.material.tree</field>
@@ -310,20 +309,15 @@
 				</form>
 			</field>
 		</record>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+		<record model="ir.actions.act_window" id="action_das_config_type_material">
+			<field name="name">Config Type Materials</field>
+			<field name="res_model">das.config.type.material</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<menuitem parent="menu_configuration" id="menu_das_config_type_material" action="action_das_config_type_material"/>
+
 	<!-- 
 	<record model="ir.ui.view" id="view_das_template_label_form">
 		<field name="name">das_template_label.form</field>
