@@ -95,7 +95,7 @@ class hr_employee(osv.osv):
 
     _columns = {
         "sign_in_auto" : fields.boolean("Sign in Auto"),
-        'workcenter_id' : fields.many2one('mrp.workcenter', 'Human resource workcenter', domain=[('type','=','hr')]),
+        'workcenter_id' : fields.many2one('mrp.workcenter', 'Human resource workcenter', domain=[('resource_type','=','hr')]),
         'workcenter_id_current': fields.function(_get_workcenter, method=True, type="many2one", relation="mrp.workcenter", string='Current workcenter'),
         'workcenter_ids' : fields.many2many('mrp.workcenter', 'mrp_workcenter_hr_employee_rel', 'employee_id', 'workcenter_id','Available Workcenters'),
         'state': fields.function(_state, method=True, type='selection', selection=[('absent', 'Absent'), ('present', 'Present')], string='Attendance'),

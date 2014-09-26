@@ -21,7 +21,7 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
 				<field name="active" position="after">
-					<field name="maintenance_costs_account_id" attrs="{'invisible':[('type','!=','hr')]}"/>
+					<field name="maintenance_costs_account_id" attrs="{'invisible':[('resource_type','!=','hr')]}"/>
 				</field>
             </field>
         </record>
@@ -33,12 +33,12 @@
             <field name="type">form</field>
             <field name="arch" type="xml">				
 <!-- 				<xpath expr="/form/notebook/page/field[@name='timesheet_id']" position="after"> -->
-				<xpath expr="//form[@string='Work Center']/group/group/field[@name='resource_type']" position="after">					
-					<field colspan="4" name="employee_pool_ids" attrs="{'invisible':[('type','=','hr')]}"/>
-					<field colspan="4" name="employee_attendance_ids" attrs="{'invisible':[('type','=','hr')]}"/>
-					<field colspan="4" name="employee_ids" attrs="{'invisible':[('type','!=','hr')]}"/>
-					<field colspan="4" name="workcenter_lines" attrs="{'invisible':[('type','=','hr')]}"/>
-					<field colspan="4" name="maintenance_lines" select="2"  attrs="{'invisible':[('type','=','hr')]}"/>
+				<xpath expr="//form[@string='Work Center']/group/group/field[@name='resource_type']" position="after">
+					<field colspan="4" name="employee_pool_ids" attrs="{'invisible':[('resource_type','=','hr')]}"/>
+					<field colspan="4" name="employee_attendance_ids" attrs="{'invisible':[('resource_type','=','hr')]}"/>
+					<field colspan="4" name="employee_ids" attrs="{'invisible':[('resource_type','!=','hr')]}"/>
+					<field colspan="4" name="workcenter_lines" attrs="{'invisible':[('resource_type','=','hr')]}"/>
+					<field colspan="4" name="maintenance_lines" select="2"  attrs="{'invisible':[('resource_type','=','hr')]}"/>
 				</xpath>
             </field>
        </record>

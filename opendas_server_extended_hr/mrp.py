@@ -164,8 +164,8 @@ class mrp_workcenter(osv.osv):
     
     _columns = {
         'otherid': fields.integer('Other id'),
-        'date_start': fields.char('Date Start', size=5, required=True),
-        'date_stop': fields.char('Date Stop',size=5, required=True),
+        'date_start': fields.char('Date Start', size=5),
+        'date_stop': fields.char('Date Stop',size=5),
 	    'workcenter_lines': fields.one2many('mrp.production.workcenter.line', 'workcenter_id', 'Workcenter Line'),
 	    'maintenance_costs_account_id': fields.many2one('account.analytic.account', 'Maintenance costs'),
 	    'maintenance_lines': fields.one2many('mrp.workcenter.maintenance', 'workcenter_id', 'Maintenance'),
