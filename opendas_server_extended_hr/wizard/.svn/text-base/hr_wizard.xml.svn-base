@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
-        <wizard id="si_so_wc" model="hr.employee" name="si_so_wc" string="Sign in / Sign out by object"/>
-        <menuitem action="si_so_wc"  id="menu_si_so_wc" parent="hr_attendance.menu_hr_attendance" type="wizard"/>
-    </data>
-</openerp>
