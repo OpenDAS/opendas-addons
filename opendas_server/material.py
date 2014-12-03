@@ -134,7 +134,7 @@ class das_template_supervision(osv.osv):
         'nb_case_y': fields.integer('nb_case_y'),
         'width_case': fields.integer('width_case'),
         'height_case': fields.integer('height_case'),
-        'image': fields.integer('image'),
+        'image': fields.char('Image', size=60),
     }
 
 das_template_supervision()

@@ -318,6 +318,50 @@
 		</record>
 		<menuitem parent="menu_configuration" id="menu_das_config_type_material" action="action_das_config_type_material"/>
 
+		<!-- DAS TEMPLATE SUPERVISION -->
+
+		<record model="ir.ui.view" id="view_das_config_material_form">
+			<field name="name">das.template.supervision.form</field>
+			<field name="model">das.template.supervision</field>
+			<field name="mode">primary</field>
+			<field name="arch" type="xml">
+				<form string="das_template_supervision">
+					<field name="name"/>
+					<field name="mapping"/>
+					<field name="nb_case_x"/>
+					<field name="nb_case_y"/>
+					<field name="width_case"/>
+					<field name="height_case"/>
+					<field name="image"/>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="view_das_template_supervision_tree">
+			<field name="name">das.template.supervision.tree</field>
+			<field name="model">das.template.supervision</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="das_template_supervision">
+					<field name="name"/>
+					<field name="mapping"/>
+					<field name="nb_case_x"/>
+					<field name="nb_case_y"/>
+					<field name="width_case"/>
+					<field name="height_case"/>
+					<field name="image"/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_das_template_supervision">
+			<field name="name">Template Supervision</field>
+			<field name="res_model">das.template.supervision</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<menuitem parent="menu_configuration" id="menu_das_template_supervision" action="action_das_template_supervision"/>
+
 	<!-- 
 	<record model="ir.ui.view" id="view_das_template_label_form">
 		<field name="name">das_template_label.form</field>

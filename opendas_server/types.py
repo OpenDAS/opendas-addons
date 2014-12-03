@@ -46,7 +46,7 @@ das_model_material()
 class das_acquisition_method(osv.osv):
     _name = 'das.acquisition.method'
     _columns = {
-        'code': fields.selection([('displayScreen',_('Display screen')),('displayKeyboard',_('Display keyboard')),('listenTypeMaterial',_('Listen material type'))], 'Acquisition method', required=True, select=True),
+        'code': fields.selection([('displayScreen',_('Display screen')),('displayKeyboard',_('Display keyboard')),('displaySupervision',_('Display supervision')),('listenTypeMaterial',_('Listen material type'))], 'Acquisition method', required=True, select=True),
         #TODO: type_material_id devient required si code = listenTypeMaterial
         'type_material_id': fields.many2one('das.type.material', 'Material type'),
         'name': fields.char('Designation', size=255),
