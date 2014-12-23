@@ -63,6 +63,8 @@ class das_generic(osv.osv):
 		'image': fields.char('Image', size=255),
 		'page': fields.integer('Page'),
 		'position': fields.integer('Position'),
+		'qty_min': fields.integer('Qty min'),
+		'qty_max': fields.integer('Qty max'),
 		'data_model_id': fields.many2one('das.data.model', 'Data model', required=True),
 		'workstation_id': fields.many2one('das.workstation', 'Workstation'),
 		'dependencies': fields.many2many('das.generic', 'das_code_dependency', 'code_id','parent_code_id',  'Dependencies'),
@@ -81,14 +83,14 @@ class das_consumer_config(osv.osv):
 	}
 das_consumer_config()
 
-#class das_code_dependency(osv.osv):
-#	_name = 'das.code.dependency'
-#	_columns = {
-##		'data_model_id': fields.many2one('das.data.model', 'Data model', required=True),
-#		'code_id': fields.many2one('das.generic', 'Code', required=True),
-##		'code': fields.char('Code', size=255, required=True),
-##		'parent_data_model_id': fields.many2one('das.data.model', 'Parent data model'),
-#		'parent_code_id': fields.many2one('das.generic', 'Code', required=True),
-##		'parent_code': fields.char('Parent code', size=255, required=True),
-#	}
-#das_code_dependency()
+class das_code_dependency(osv.osv):
+	_name = 'das.code.dependency'
+	_columns = {
+#		'data_model_id': fields.many2one('das.data.model', 'Data model', required=True),
+		'code_id': fields.many2one('das.generic', 'Code', required=True),
+#		'code': fields.char('Code', size=255, required=True),
+#		'parent_data_model_id': fields.many2one('das.data.model', 'Parent data model'),
+		'parent_code_id': fields.many2one('das.generic', 'Parent Code', required=True),
+#		'parent_code': fields.char('Parent code', size=255, required=True),
+	}
+das_code_dependency()

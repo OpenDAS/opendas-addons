@@ -66,6 +66,8 @@
 				<field name="code" select="1"/>
 				<field name="name" select="1"/>
 				<field name="image" select="2"/>
+				<field name="qty_min"/>
+				<field name="qty_max"/>
 				<field name="page"/>
 				<field name="position"/>
 				<field name="dependencies"/>
@@ -127,30 +129,26 @@
 	</record>
 	<menuitem parent="menu_configuration" id="menu_das_consumer_config" action="action_das_consumer_config"/>
 	
-	<!--
-	
 	<record model="ir.ui.view" id="view_das_code_dependency_form">
 		<field name="name">das.code.dependency.form</field>
 		<field name="model">das.code.dependency</field>
 		<field name="type">form</field>
 		<field name="arch" type="xml">
 			<form string="Codes dependencies">
-				<field name="parent_data_model_id" select="1"/>
-				<field name="parent_code" select="1"/>
-				<field name="data_model_id" select="1"/>
-				<field name="code" select="1"/>
+				<field name="code_id" />
+				<field name="parent_code_id" />
 			</form>
 		</field>
 	</record>
+ 
 	<record model="ir.ui.view" id="view_das_code_dependency_tree">
 		<field name="name">das.code.dependency.tree</field>
 		<field name="model">das.code.dependency</field>
 		<field name="type">tree</field>
 		<field name="arch" type="xml">
 			<tree string="Codes dependencies" editable="bottom">
-				<field name="parent_code"/>
-				<field name="data_model_id"/>
-				<field name="code"/>
+				<field name="code_id" />
+				<field name="parent_code_id" />
 			</tree>
 		</field>
 	</record>
@@ -161,6 +159,5 @@
 		<field name="view_id" ref="view_das_code_dependency_tree"/>
 	</record>
 	<menuitem parent="menu_configuration" id="menu_das_code_dependency" action="action_das_code_dependency"/>
-
---></data>
+</data>
 </openerp>
