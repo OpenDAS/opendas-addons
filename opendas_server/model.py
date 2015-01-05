@@ -34,7 +34,7 @@ class das_data_model(osv.osv):
 		#das_generic, \home\data\fic.csv, ...
 		'source': fields.char('Source data model (das_generic, /home/data/fic.csv, ...)', size=255),
 		#Numeric, Alpha, EAN, ... 
-		'ctrl': fields.selection([('int',_('Integer')),('num',_('Float')),('alpha',_('Numbers and characters')),('alphaMin',_('Lower and upper characters and numbers')),('ean13',_('EAN13')),('ean128',_('EAN 128')),('barre',_('Barre Code ASPerpgi'))], 'Validation method', select=True),
+		'ctrl': fields.selection([('int',_('Integer')),('num',_('Float')),('alpha',_('Numbers and characters')),('alphaMin',_('Lower and upper characters and numbers')),('ean13',_('EAN13')),('ean128',_('EAN 128')),('barre',_('Odoo Barcode'))], 'Validation method', select=True),
 #		'ctrl': fields.char('Validation method', size=255),
 		#Function name to call source
 		'fct_name': fields.char('Function name to call source', size=32),

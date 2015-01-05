@@ -47,7 +47,7 @@ class hr_employee(osv.osv):
                 result.append({'id':str(this.otherid),'name':this.name})
         return {"code":0,"string":_("OK"),"object":result}
     
-    def talend_get_employee_barre(self, cr, uid, context, filter):
+    def talend_get_employee_bar(self, cr, uid, context, filter):
         return self.talend_get_employees(cr, uid, context, filter)
 
     def talend_get_employees(self, cr, uid, context, filter):
@@ -60,7 +60,7 @@ class hr_employee(osv.osv):
                 result.append({'id':key+","+this.otherid,'name':this.name})
         return {"code":0,"string":_("OK"),"object":result}
     
-    def talend_get_employee_in_barre(self, cr, uid, context, filter):
+    def talend_get_employee_in_bar(self, cr, uid, context, filter):
         return self.talend_get_employees_present(cr, uid, context, filter)
 
     def talend_get_employees_present(self, cr, uid, context, filter):
@@ -73,7 +73,7 @@ class hr_employee(osv.osv):
                 result.append({'id':key+","+this.otherid,'name':this.name})
         return {"code":0,"string":_("OK"),"object":result}
     
-    def talend_get_employee_out_barre(self, cr, uid, context, filter):
+    def talend_get_employee_out_bar(self, cr, uid, context, filter):
         return self.talend_get_employees_absent(cr, uid, context, filter)
 
     def talend_get_employees_absent(self, cr, uid, context, filter):
@@ -87,7 +87,7 @@ class hr_employee(osv.osv):
                 result.append({'id':key+","+this.otherid,'name':this.name})
         return {"code":0,"string":_("OK"),"object":result}   
     
-    def talend_get_employee_in_workcenter_barre(self, cr, uid, context, filter):
+    def talend_get_employee_in_workcenter_bar(self, cr, uid, context, filter):
         return self.talend_get_active_employee_pool_in_workcenter(cr, uid, context, filter)
 
     def talend_get_active_employee_pool_in_workcenter(self, cr, uid, context, filter):
@@ -110,7 +110,7 @@ class hr_employee(osv.osv):
                 result.append({'id':key+","+this.otherid,'name':this.name})
         return {"code":0,"string":_("OK"),"object":result}
     
-    def talend_get_employee_out_workcenter_barre(self, cr, uid, context, filter):
+    def talend_get_employee_out_workcenter_bar(self, cr, uid, context, filter):
         return self.talend_get_active_employee_pool_in_workcenter_not_in(cr, uid, context, filter)
     
     def talend_get_active_employee_pool_in_workcenter_not_in(self, cr, uid, context, filter):
@@ -296,13 +296,12 @@ class hr_employee(osv.osv):
                 
         return {"code":0,"string":result,"object":[]}
     
-    def talend_in_out_barre(self, cr, uid, context, filter):
-        logger.debug("opendas : talend_in_out_barre")
+    def talend_in_out_bar(self, cr, uid, context, filter):
+        logger.debug("opendas : talend_in_out_bar")
         key = "EMPL"
 
         if 'employee' not in context :
             return {"code":2,"string":_("Error, employee not in context"),"object":[]}
-
         if len(context['employee']) == 0:
             return {"code":2,"string":_("Error, no employee found"),"object":[]}
         if len(context['employee']) > 1:
@@ -335,16 +334,14 @@ class hr_employee(osv.osv):
                 result += employee.name+_(" : Input \n")
                 
         return {"code":0,"string":result,"object":[]}
-        
-    def talend_login_workcenter_barre(self, cr, uid, context, filter):
-        return self.talend_login_workcenter(cr, uid, context, filter)
-    
+
     def talend_login_workcenter(self, cr, uid, context, filter):
-        logger.debug("opendas : talend_login_workcenter")
-        print context
-        print filter
+        logger.debug("opendas : talend_login_workcenter context : %s"%(context))
         key = "EMPL"
         if 'employee' not in context :
+            
+            logger.debug("opendas : talend_login_workcenter employee not in context")
+            
             return {"code":2,"string":_("Error, employee not in context"),"object":[]}
         if len(context['employee']) == 0:
             return {"code":2,"string":_("Error, no employee transmited"),"object":[]}
@@ -379,8 +376,8 @@ class hr_employee(osv.osv):
         result = self.work_change(cr,uid,employee_ids,{'model':"mrp.workcenter",'id':workcenter_ids[0]})
         return {"code":0,"string":result,"object":[]}
      
-    def talend_change_workcenter_barre(self, cr, uid, context, filter):
-        logger.debug("opendas : talend_change_workcenter_barre")
+    def talend_change_workcenter_bar(self, cr, uid, context, filter):
+        logger.debug("opendas : talend_change_workcenter_bar")
         key = "EMPL"
 
         if 'employee' not in context :
@@ -412,12 +409,13 @@ class hr_employee(osv.osv):
             return {"code":2,"string":_("Error, no workcenter found"),"object":[]}
         if len(workcenter_ids) > 1 :
             return {"code":2,"string":_("Error, more than one workcenter found"),"object":[]}        
-         
+        
+        logger.debug("workcenter_ids[0] ->",workcenter_ids[0])
         result = self.work_change(cr,uid,employee_ids,{'model':"mrp.workcenter",'id':workcenter_ids[0]})
         return {"code":0,"string":result,"object":[]}
     
-    def talend_change_workcenter_line_barre(self, cr, uid, context, filter):
-        logger.debug("opendas : talend_change_workcenter_line_barre")
+    def talend_change_workcenter_line_bar(self, cr, uid, context, filter):
+        logger.debug("opendas : talend_change_workcenter_line_bar")
         key = "EMPL"
 
         if 'employee' not in context :
