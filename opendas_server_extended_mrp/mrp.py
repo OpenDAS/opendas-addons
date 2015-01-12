@@ -84,7 +84,7 @@ class mrp_production(osv.osv):
                          'name':"Production Order",
                          "ean13":False,
             })
-            temp.update({'file':[base64.encodestring(netsvc.LocalService('report.mrp.production.order').create(cr, uid, [this.id], {}, {})[0])]})
+            temp.update({'file':[base64.encodestring(openerp.netsvc.LocalService('report.mrp.production.order').create(cr, uid, [this.id], {}, {})[0])]})
             result.append(temp)
         return {"code":0,"string":_("OK"),"object":result}
     

@@ -47,12 +47,15 @@ class stock_picking(osv.osv):
 #        print context
 #        print filter
         result = []
-#        filter.extend([('type','=','out'),('sale_id','!=',False),('state','in',('draft','auto','confirmed','assigned'))])
+        #filter.extend([('type','=','out'),('sale_id','!=',False),('state','in',('draft','auto','confirmed','assigned'))])
+        #filter.extend([('sale_id','!=',False),('state','in',('draft','auto','confirmed','assigned'))])
         key = "PICK"
         obj_ids = self.browse(cr,uid,self.search(cr,uid,filter))
         obj_ids = obj_ids[0:10]
         for this in obj_ids:
-            vals = this.read(['origin','date_out','date_out_planned','date_done','state','min_date','date','serie_id'])[0]
+            print "PICKING Object id:",this.id," name:",this.name
+            #vals = this.read(['origin','date_out','date_out_planned','date_done','state','min_date','date','serie_id'])[0]
+            vals = this.read(['origin','date_done','state','min_date','date'])[0]
             vals.update({'id':key+","+str(this.id),'name':this.name})
             result.append(vals)
         return {"code":0,"string":_("OK"),"object":result}
@@ -104,7 +107,7 @@ class stock_picking(osv.osv):
                          'name':"BL",
                          "ean13":False,
             })
-            vals.update({'file':[base64.encodestring(netsvc.LocalService("report.stock.picking.list").create(cr, uid, [this.id], {}, {})[0])]})
+            vals.update({'file':[base64.encodestring(openerp.netsvc.LocalService("report.stock.picking.list").create(cr, uid, [this.id], {}, {})[0])]})
             result.append(vals)
         return {"code":0,"string":_("OK"),"object":result}
     
@@ -184,6 +187,7 @@ class stock_picking(osv.osv):
             for move in this.move_lines:
                 if move.product_id.id in context['product_id'] :
                     for move_packaging in move.move_packaging_ids:
+                        print "move_packaging => name :", move.name," id :", move_packaging.id
                         if move_packaging.state == 'not_send':
                             result.append({
                                         "id":"PACK"+","+str(move_packaging.id),
@@ -535,7 +539,7 @@ class stock_picking(osv.osv):
                                 'product_uos_qty': qty,
                             })
             
-            wf_service = netsvc.LocalService("workflow")
+            wf_service = openerp.netsvc.LocalService("workflow")
             if new_picking:
                 wf_service.trg_validate(uid, 'stock.picking', new_picking, 'button_confirm', cr)
                 self.write(cr, uid, [picking.id], {'backorder_id': new_picking})

@@ -439,8 +439,8 @@ class hr_employee(osv.osv):
             return {"code":2,"string":_("Error, workcenter not in context"),"object":[]}
         if 'production' not in context :
             return {"code":2,"string":_("Error, production not in context"),"object":[]}
-        if 'adjustment' not in context :
-            return {"code":2,"string":_("Error, adjustment not in context"),"object":[]}
+#         if 'adjustment' not in context :
+#             return {"code":2,"string":_("Error, adjustment not in context"),"object":[]}
     
         employee_ids = self.pool.get('hr.employee').search(cr,uid,filter)
         if len(employee_ids) == 0 :
@@ -452,7 +452,7 @@ class hr_employee(osv.osv):
         if len(workcenter_line_id) > 1 :
             return {"code":2,"string":_("Error, more than one workcenter line found"),"object":[]}  
         workcenter_line_id = workcenter_line_id[0]    
-        
+        #result = self.work_change(cr,uid,employee_ids,{'model':"mrp.production.workcenter.line",'id':workcenter_line_id})
         result = self.work_change(cr,uid,employee_ids,{'model':"mrp.production.workcenter.line",'id':workcenter_line_id,'tps':eval(context['adjustment'][0])})
         return {"code":0,"string":result,"object":[]}
     

@@ -55,11 +55,11 @@ class hr_attendance(osv.osv):
             
             print "*"*60
                    
-            if len(atts > 0):        
-                if (len(atts) == 1 and atts[0][0] == 'sign_in') or (len(atts) == 2 and atts[0][2] == id and atts[0][0] != atts[1][0]) or (len(atts) == 2 and atts[0][2] != id and atts[0][0] != atts[1][0] and atts[1][0] == 'sign_in'):
-                    return False
+#             if len(atts > 0):        
+#                 if (len(atts) == 1 and atts[0][0] == 'sign_in') or (len(atts) == 2 and atts[0][2] == id and atts[0][0] != atts[1][0]) or (len(atts) == 2 and atts[0][2] != id and atts[0][0] != atts[1][0] and atts[1][0] == 'sign_in'):
+#                     return False
         return True
-#    _constraints = [(_altern_si_so, 'Error: Sign in (resp. Sign out) must follow Sign out (resp. Sign in)', ['action'])]
+    _constraints = [(_altern_si_so, 'Error: Sign in (resp. Sign out) must follow Sign out (resp. Sign in)', ['action'])]
     _order = 'id desc'
    
 hr_attendance()
