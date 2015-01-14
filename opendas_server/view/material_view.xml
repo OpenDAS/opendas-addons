@@ -361,6 +361,40 @@
 			<field name="view_mode">tree,form</field>
 		</record>
 		<menuitem parent="menu_configuration" id="menu_das_template_supervision" action="action_das_template_supervision"/>
+		
+		<!-- DAS TEMPLATE REPORT -->
+		
+		<record model="ir.ui.view" id="view_das_template_report_form">
+			<field name="name">das.template.report.form</field>
+			<field name="model">das.template.report</field>
+			<field name="mode">primary</field>
+			<field name="arch" type="xml">
+				<form string="das_template_supervision">
+					<field name="name"/>
+					<field name="xml"/>
+				</form>
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="view_das_template_report_tree">
+			<field name="name">das.template.report.tree</field>
+			<field name="model">das.template.report</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="das_template_supervision">
+					<field name="name"/>
+					<field name="xml"/>
+				</tree>
+			</field>
+		</record>
+		
+		<record model="ir.actions.act_window" id="action_das_template_report">
+			<field name="name">Template Report</field>
+			<field name="res_model">das.template.report</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<menuitem parent="menu_configuration" id="menu_das_template_report" action="action_das_template_report"/>
 
 	<!-- 
 	<record model="ir.ui.view" id="view_das_template_label_form">
