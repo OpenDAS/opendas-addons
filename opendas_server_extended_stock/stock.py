@@ -32,6 +32,7 @@ from openerp.osv import fields, osv
 from openerp.tools import config
 from openerp.tools.translate import _
 import openerp.tools
+from openerp.report import render_report
 import datetime
 import base64
 
@@ -82,6 +83,7 @@ class stock_picking(osv.osv):
         result = []
         temp = {}
         for this in self.browse(cr,uid,self.search(cr,uid,filter)):
+            print " this name :",this.name
 #            dict = this.read(['origin','date_out','date_out_planned','date_done','state','min_date','date','serie_id'])[0]
 #            dict.update({
 #                         'id':str(this.id)+"1-------",
@@ -101,13 +103,18 @@ class stock_picking(osv.osv):
 #            result.append(dict2)
             
             #####################################
-            vals = this.read(['origin','date_out','date_out_planned','date_done','state','min_date','date','serie_id'])[0]
+            #vals = this.read(['origin','date_out','date_out_planned','date_done','state','min_date','date','serie_id'])[0]
+            vals = this.read(['origin','date_done','state','min_date','date'])[0]
             vals.update({
                          'id':str(this.id),
-                         'name':"BL",
+                         'name':"Delivery order",
                          "ean13":False,
             })
-            vals.update({'file':[base64.encodestring(openerp.netsvc.LocalService("report.stock.picking.list").create(cr, uid, [this.id], {}, {})[0])]})
+            
+            report_data, format = render_report(cr, uid, [this.id], stock.report_picking, {}, context=context)
+            vals.update({'file':base64.encodestring(report_data),'file_type':format})
+            self.pool.get('ir.attachment').create(cr,uid,vals)
+            #vals.update({'file':[base64.encodestring(openerp.report.render_report(cr,uid,[this.id],stock.report_picking,{},context = context).create(cr, uid, [this.id], {}, {})[0])]}) 
             result.append(vals)
         return {"code":0,"string":_("OK"),"object":result}
     
