@@ -54,7 +54,6 @@ class stock_picking(osv.osv):
         obj_ids = self.browse(cr,uid,self.search(cr,uid,filter))
         obj_ids = obj_ids[0:10]
         for this in obj_ids:
-            print "PICKING Object id:",this.id," name:",this.name
             #vals = this.read(['origin','date_out','date_out_planned','date_done','state','min_date','date','serie_id'])[0]
             vals = this.read(['origin','date_done','state','min_date','date'])[0]
             vals.update({'id':key+","+str(this.id),'name':this.name})
@@ -83,7 +82,6 @@ class stock_picking(osv.osv):
         result = []
         temp = {}
         for this in self.browse(cr,uid,self.search(cr,uid,filter)):
-            print " this name :",this.name
 #            dict = this.read(['origin','date_out','date_out_planned','date_done','state','min_date','date','serie_id'])[0]
 #            dict.update({
 #                         'id':str(this.id)+"1-------",
