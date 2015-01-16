@@ -32,7 +32,7 @@ from openerp.osv import fields, osv
 from openerp.tools import config
 from openerp.tools.translate import _
 import openerp.tools
-from openerp.report import render_report
+from openerp import api, models
 import datetime
 import base64
 
@@ -110,11 +110,12 @@ class stock_picking(osv.osv):
                          'name':"Delivery order",
                          "ean13":False,
             })
-            
-            report_data, format = render_report(cr, uid, [this.id], stock.report_picking, {}, context=context)
-            vals.update({'file':base64.encodestring(report_data),'file_type':format})
-            self.pool.get('ir.attachment').create(cr,uid,vals)
-            #vals.update({'file':[base64.encodestring(openerp.report.render_report(cr,uid,[this.id],stock.report_picking,{},context = context).create(cr, uid, [this.id], {}, {})[0])]}) 
+
+            report_obj = this.env['report']
+            pdf = report_obj.get_pdf(this,'stock.report_picking')
+
+            vals.update({'file':base64.encodestring(pdf)})
+
             result.append(vals)
         return {"code":0,"string":_("OK"),"object":result}
     
