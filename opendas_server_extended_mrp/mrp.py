@@ -83,9 +83,12 @@ class mrp_production(osv.osv):
                          'id':str(this.id),
                          'name':"Production Order",
                          "ean13":False,
-            })
-            temp.update({'file':[base64.encodestring(openerp.netsvc.LocalService('report.mrp.production.order').create(cr, uid, [this.id], {}, {})[0])]})
+            })         
+            report_obj = this.env['report']
+            pdf = report_obj.get_pdf(this,'mrp.report_mrporder')         
+            temp.update({'file':base64.encodestring(pdf)})
             result.append(temp)
+
         return {"code":0,"string":_("OK"),"object":result}
     
 mrp_production()
