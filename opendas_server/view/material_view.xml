@@ -106,6 +106,7 @@
 					<field name="mask" select="1"/>
 					<field name="button_xml" colspan="4" select="2"/>
 					<field name="button_bottom_xml" colspan="4" select="2"/>
+					<field name="keyboard_xml"/>
 					<field name="function_xml" colspan="4" select="2"/>
 					<!--  <field name="model_ids" colspan="4" select="2"/>-->
 				</form>
@@ -119,8 +120,9 @@
 				<tree string="das_functional_configuration">
 					<field name="name"/>
 					<field name="mask"/>
-					<field name="button_xml"/>
+					<field name="button_xml"/>					
 					<field name="button_bottom_xml"/>
+					<field name="keyboard_xml"/>
 					<field name="function_xml"/>
 				</tree>
 			</field>
