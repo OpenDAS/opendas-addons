@@ -61,7 +61,7 @@ class stock_picking(osv.osv):
         return {"code":0,"string":_("OK"),"object":result}
 
     def talend_get_report_by_picking(self, cr, uid, context, filter):
-        print "talend_get_report_by_picking"
+#        print "talend_get_report_by_picking"
 #        print context
 #        print filter
         result = []
@@ -82,30 +82,11 @@ class stock_picking(osv.osv):
         result = []
         temp = {}
         for this in self.browse(cr,uid,self.search(cr,uid,filter)):
-#            dict = this.read(['origin','date_out','date_out_planned','date_done','state','min_date','date','serie_id'])[0]
-#            dict.update({
-#                         'id':str(this.id)+"1-------",
-#                         'name':"Etiquettes",
-#                         "ean13":False,
-#            })
-#            dict.update({'file':[base64.encodestring(netsvc.LocalService('report.stock.picking.labels').create(cr, uid, [this.id], {}, {})[0])]})
-#            result.append(dict)
-#            #####################################
-#            dict2 = this.read(['origin','date_out','date_out_planned','date_done','state','min_date','date','serie_id'])[0]
-#            dict2.update({
-#                         'id':str(this.id)+"2",
-#                         'name':"BL",
-#                         "ean13":False,
-#            })
-#            dict2.update({'file':[base64.encodestring(netsvc.LocalService("report.sale.shipping3").create(cr, uid, [this.id], {}, {})[0])]})
-#            result.append(dict2)
-            
-            #####################################
             #vals = this.read(['origin','date_out','date_out_planned','date_done','state','min_date','date','serie_id'])[0]
             vals = this.read(['origin','date_done','state','min_date','date'])[0]
             vals.update({
                          'id':str(this.id),
-                         'name':"Delivery order",
+                         'name':"Delivery slip",
                          "ean13":False,
             })
 
@@ -119,9 +100,7 @@ class stock_picking(osv.osv):
     
     def talend_get_product_by_picking(self, cr, uid, context, filter):
         print "talend_get_product_by_picking"
-#        print context
-#        print filter
-        
+
         key = "PICK"
         if 'picking' not in context :
             return {"code":2,"string":_("Error, picking not in context"),"object":[]}
@@ -150,8 +129,7 @@ class stock_picking(osv.osv):
                 else:
                     temp[move.product_id.id]["qty"]+=int(move.product_qty)
         for i in temp :
-            result.append(temp[i])
-            
+            result.append(temp[i])           
             
         return {"code":0,"string":_("OK"),"object":result}
     
@@ -173,6 +151,7 @@ class stock_picking(osv.osv):
             if key != tmp[0] :
                 return {"code":2,"string":_("Error, This is not an picking"),"object":[]}
             tmp_context.append(int(tmp[1]))
+        print "tmp_context 1:",tmp_context
         context['id'] = tmp_context  
         filter.append(('id','in',context['id']))
         
@@ -182,15 +161,19 @@ class stock_picking(osv.osv):
         tmp_context = []
         for i in context['product_id']:
             tmp = i.split(',')
+            print tmp
             if len(tmp) != 2 :
                 return {"code":2,"string":_("Error, product id"),"object":[]}
             if key != tmp[0] :
                 return {"code":2,"string":_("Error, This is not an product"),"object":[]}
             tmp_context.append(int(tmp[1]))
+        print "tmp_context 2:",tmp_context
         context['product_id'] = tmp_context  
         
         for this in self.browse(cr,uid,self.search(cr,uid,filter)):
+            print "this move lines:",this.move_lines
             for move in this.move_lines:
+                print "move:", move
                 if move.product_id.id in context['product_id'] :
                     for move_packaging in move.move_packaging_ids:
                         print "move_packaging => name :", move.name," id :", move_packaging.id
@@ -440,10 +423,9 @@ class stock_picking(osv.osv):
         self.do_split_all(cr,uid,[picking.id],table_qty,context)
         
         return {"code":0,"string":"ok","object":[]}
-
-    
     
     def do_split_all(self, cr, uid, ids, datas, context):
+
         for picking in self.browse(cr,uid,ids):
             new_picking = None
             new_moves = []
@@ -454,7 +436,7 @@ class stock_picking(osv.osv):
             if not datas:
                 data = {}
                 for move in picking.move_lines :
-                    data[move.product_id.id] = move.product_qty
+                    data[move.product_id.id] = move.product_uom_qty
             else:
                 data = datas.copy()
                     
@@ -462,25 +444,25 @@ class stock_picking(osv.osv):
                 if move.product_id.id in data:
                     qty = data[move.product_id.id]
                 else:
-                    qty = 0
-                    
-                if move.product_qty == qty:
+                    qty = 0             
+
+                if move.product_uom_qty == qty:
                     complete.append(move)
-                elif move.product_qty > qty:
+                elif move.product_uom_qty > qty:
                     too_few.append(move)
                 else:
                     too_many.append(move)
-                    
-                if (picking.type == 'in') and (move.product_id.cost_method == 'average'):
+
+                if (picking.picking_type_id.code == 'incoming') and (move.product_id.cost_method == 'average'):
                     product = self.pool.get('product.product').browse(cr, uid, [move.product_id.id])[0]
                     user = self.pool.get('res.users').browse(cr, uid, [uid])[0]
                     qty = qty
                     uom = product.uom_id.id
                     price = move.purchase_line_id.price_unit
                     currency = picking.purchase_id.pricelist_id.currency_id.id
-        
+         
                     qty = self.pool.get('product.uom')._compute_qty(cr, uid, uom, qty, product.uom_id.id)
-        
+         
                     if (qty > 0):
                         new_price = self.pool.get('res.currency').compute(cr, uid, currency,user.company_id.currency_id.id, price)
                         new_price = self.pool.get('product.uom')._compute_price(cr, uid, uom, new_price, product.uom_id.id)
@@ -488,7 +470,7 @@ class stock_picking(osv.osv):
                             new_std_price = new_price
                         else:
                             new_std_price = ((product.standard_price * product.qty_available) + (new_price * qty))/(product.qty_available + qty)
-        
+         
                         self.pool.get('product.product').write(cr, uid, [product.id],{'standard_price': new_std_price})
                         self.pool.get('stock.move').write(cr, uid, [move.id], {'price_unit': new_price})
             
@@ -510,7 +492,7 @@ class stock_picking(osv.osv):
                     #ASPerience: gérer product_pack_qty dans la gestion du reliquat et ici
                     new_obj = self.pool.get('stock.move').copy(cr, uid, move.id,
                         {
-                            'product_qty' : qty,
+                            'product_uom_qty' : qty,
                             'product_uos_qty':qty,
                             'picking_id' : new_picking,
                             'state': 'assigned',
@@ -519,8 +501,8 @@ class stock_picking(osv.osv):
                         })
                 self.pool.get('stock.move').write(cr, uid, [move.id],
                         {
-                            'product_qty' : move.product_qty - qty,
-                            'product_uos_qty':move.product_qty - qty,
+                            'product_uom_qty' : move.product_uom_qty - qty,
+                            'product_uos_qty':move.product_uos_qty - qty,
                         })
                 
             if new_picking:
@@ -528,7 +510,7 @@ class stock_picking(osv.osv):
                 for move in too_many:
                     self.pool.get('stock.move').write(cr, uid, [move.id],
                             {
-                                'product_qty' : qty,
+                                'product_uom_qty' : qty,
                                 'product_uos_qty': qty,
                                 'picking_id': new_picking,
                             })
@@ -541,7 +523,7 @@ class stock_picking(osv.osv):
                     #ASPerience: gérer product_pack_qty ici aussi
                     self.pool.get('stock.move').write(cr, uid, [move.id],
                             {
-                                'product_qty': qty,
+                                'product_uom_qty': qty,
                                 'product_uos_qty': qty,
                             })
             
