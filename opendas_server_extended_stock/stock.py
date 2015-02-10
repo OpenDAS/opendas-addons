@@ -531,11 +531,11 @@ class stock_picking(osv.osv):
             if new_picking:
                 wf_service.trg_validate(uid, 'stock.picking', new_picking, 'button_confirm', cr)
                 self.write(cr, uid, [picking.id], {'backorder_id': new_picking})
-                self.action_move(cr, uid, [new_picking])
+                self.action_done(cr, uid, [new_picking])
                 wf_service.trg_validate(uid, 'stock.picking', new_picking, 'button_done', cr)
                 wf_service.trg_write(uid, 'stock.picking', picking.id, cr)
             else:
-                self.action_move(cr, uid, [picking.id])
+                self.action_done(cr, uid, [picking.id])
                 wf_service.trg_validate(uid, 'stock.picking', picking.id, 'button_done', cr) 
             bo_name = ''
             if new_picking:
