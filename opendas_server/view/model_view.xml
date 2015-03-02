@@ -6,25 +6,29 @@
 		<field name="model">das.data.model</field>
 		<field name="type">form</field>
 		<field name="arch" type="xml">
-			<form string="Data models" >
-					<field name="code" colspan="3" select="1"/>
-					<newline/>
-					<field name="name" colspan="3" select="1"/>
-					<newline/>
-					<newline/>
-					<field name="type" colspan="3" select="1"/>
-					<field name="type_fct" colspan="3" select="1"/>
-					<field name="source" colspan="3" select="2"/>
-					<field name="ctrl" colspan="3" select="2"/>
-					<field name="fct_name" colspan="3" select="2"/>
-					<field name="type_select" colspan="3" select="2"/>
-					<field name="max_length" colspan="3" select="2"/>
-					<field name="acquisition_methods" colspan="3"  select="1"/>
-					<newline/>
-					<field name="qty_max" colspan="3"/>
-					<field name="qty_min" colspan="3"/>
-					<field name="parent_id" colspan="3" select="2"/>
-					<field name="child_ids" colspan="3"  select="2"/>
+			<form>
+				<sheet>
+					<group string = "Data models">
+						<field name="code" select="1"/>
+						<field name="name" select="1"/>
+						<field name="type" select="1"/>
+						<field name="type_fct" select="1"/>
+						<field name="source" select="2"/>
+						<field name="ctrl" select="2"/>
+						<field name="fct_name" select="2"/>
+						<field name="type_select" select="2"/>
+						<field name="max_length" select="2"/>
+					</group>
+					<label for="acquisition_method" string="Acquisition Methods" />
+					<field name="acquisition_methods" select="1"/>
+					<group>
+						<field name="qty_max" />
+						<field name="qty_min" />
+						<field name="parent_id" select="2"/>
+					</group>
+					<label for="acquisition_method" string="Children" />
+					<field name="child_ids" select="2"/>
+				</sheet>
 			</form>
 		</field>
 	</record>
@@ -60,17 +64,22 @@
 		<field name="model">das.generic</field>
 		<field name="type">form</field>
 		<field name="arch" type="xml">
-			<form string="Generic datas">
-				<field name="data_model_id" select="1"/>
-				<field name="workstation_id" select="1"/>
-				<field name="code" select="1"/>
-				<field name="name" select="1"/>
-				<field name="image" select="2"/>
-				<field name="qty_min"/>
-				<field name="qty_max"/>
-				<field name="page"/>
-				<field name="position"/>
-				<field name="dependencies"/>
+			<form>
+				<sheet>
+					<group string="Generic datas">
+						<field name="data_model_id" select="1"/>
+						<field name="workstation_id" select="1"/>
+						<field name="code" select="1"/>
+						<field name="name" select="1"/>
+						<field name="image" select="2"/>
+						<field name="qty_min"/>
+						<field name="qty_max"/>
+						<field name="page"/>
+						<field name="position"/>
+					</group>
+					<label for="dependencies" string="Data models" />
+					<field name="dependencies"/>
+				</sheet>
 			</form>
 		</field>
 	</record>
