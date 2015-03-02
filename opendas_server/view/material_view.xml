@@ -6,10 +6,14 @@
 			<field name="model">das.material</field>
 			<field name="type">form</field>
 			<field name="arch" type="xml">
-				<form string="das_material">
-					<field name="code" select="1"/>
-					<field name="name" select="1"/>
-					<field name="model_material_id" select="1"/>
+				<form>
+					<sheet>
+						<group string="DAS Material">
+							<field name="code" select="1"/>
+							<field name="name" select="1"/>
+							<field name="model_material_id" select="1"/>
+						</group>
+					</sheet>
 				</form>
 			</field>
 		</record>
@@ -38,10 +42,14 @@
 			<field name="model">das.mask</field>
 			<field name="type">form</field>
 			<field name="arch" type="xml">
-				<form string="das_mask">
-					<field name="code" select="1"/>
-					<field name="name" select="1"/>
-					<field name="description" select="1"/>
+				<form>
+					<sheet>
+						<group string="das_mask">
+							<field name="code" select="1"/>
+							<field name="name" select="1"/>
+							<field name="description" select="1"/>
+						</group>
+					</sheet>					
 				</form>
 			</field>
 		</record>
@@ -70,10 +78,14 @@
 			<field name="model">das.graphical.configuration</field>
 			<field name="type">form</field>
 			<field name="arch" type="xml">
-				<form string="DAS Graphical configuration">
-					<field name="name" select="1"/>
-					<field name="mask" select="1"/>
-					<field name="graphical_xml" colspan="4" select="2"/>
+				<form>
+					<sheet>
+						<group string="DAS Graphical configuration">
+							<field name="name" select="1"/>
+							<field name="mask" select="1"/>
+							<field name="graphical_xml" select="2"/>
+						</group>
+					</sheet>					
 				</form>
 			</field>
 		</record>
@@ -101,14 +113,21 @@
 			<field name="model">das.functional.configuration</field>
 			<field name="type">form</field>
 			<field name="arch" type="xml">
-				<form string="das_functional_configuration">
-					<field name="name" />
-					<field name="mask" select="1"/>
-					<field name="button_xml" colspan="4" select="2"/>
-					<field name="button_bottom_xml" colspan="4" select="2"/>
-					<field name="keyboard_xml"/>
-					<field name="function_xml" colspan="4" select="2"/>
-					<!--  <field name="model_ids" colspan="4" select="2"/>-->
+				<form>
+					<sheet>
+						<group string="DAS Functional Configuration">
+							<field name="name" />
+							<field name="mask" select="1"/>
+						</group>
+						<label for="button_xml" string="Button xml"/>	
+						<field name="button_xml" select="2"/>
+						<label for="button_bottom_xml" string="Button bottom xml"/>
+						<field name="button_bottom_xml" select="2"/>
+						<label for="keyboard_xml" string="Keyboard xml"/>
+						<field name="keyboard_xml"/>
+						<label for="function_xml" string="Function xml"/>
+						<field name="function_xml" select="2"/>			
+					</sheet>				
 				</form>
 			</field>
 		</record>
@@ -221,24 +240,18 @@
 			<field name="model">das.config.material</field>
 			<field name="mode">primary</field>
 			<field name="arch" type="xml">
-				<form string="das_config_material">
-					<field name="code" select="1"/>
-					<field name="name" select="2"/>
-					<field name="workstation_id" select="1"/>
-					<field name="material_id" select="1"/>
-					<field name="config_type_material_id" select="2"/>
-					<field name="port" select="2"/>
-					<field name="description"/>
-					<!--<field name="transmit_protocol_id" colspan="4">
-						<tree>
-							<field name="type"/>
-							<field name="name"/>
-						</tree>
-						<form>
-							<field name="type"/>
-							<field name="name"/>
-						</form>
-					</field>-->
+				<form>
+					<sheet>
+						<group string="Material Config">
+							<field name="code" select="1"/>
+							<field name="name" select="2"/>
+							<field name="workstation_id" select="1"/>
+							<field name="material_id" select="1"/>
+							<field name="config_type_material_id" select="2"/>
+							<field name="port" select="2"/>
+							<field name="description"/>
+						</group>
+					</sheet>
 				</form>
 			</field>
 		</record>
@@ -289,25 +302,30 @@
 			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form string="das_config_type_material">
-					<field name="code" colspan="2" />
-					<field name="name"/>
-					<field name="transmit_protocol_id" />
-					<field name="speed" attrs="{'invisible': [('port_type','=','rj45')]}" />
-					<field name="parity" attrs="{'invisible': [('port_type','=','rj45')]}" />
-					<field name="stop_bit" attrs="{'invisible': [('port_type','=','rj45')]} "/>
-					<field name="databit" attrs="{'invisible': [('port_type','=','rj45')]}" />
-					<field name="flow_control" attrs="{'invisible': [('port_type','=','rj45')]}" />
-					<field name="issimple" />
-					<field name="iscumulative" attrs="{'invisible': [('issimple','=','0')]}" />
-					<field name="port_type" />
-					<field name="type_transmit_protocol_line" attrs="{'invisible': [('issimple', '=', 'True') ] }">
-						<tree string="Transmit type protocol">
-							<field name="sequence"/>
-							<field name="type"/>
+					<sheet>
+						<group string="Material config type">
+							<field name="code" colspan="2" />
 							<field name="name"/>
-							<field name="language"/>
-						</tree>
-					</field>
+							<field name="transmit_protocol_id" />
+							<field name="speed" attrs="{'invisible': [('port_type','=','rj45')]}" />
+							<field name="parity" attrs="{'invisible': [('port_type','=','rj45')]}" />
+							<field name="stop_bit" attrs="{'invisible': [('port_type','=','rj45')]} "/>
+							<field name="databit" attrs="{'invisible': [('port_type','=','rj45')]}" />
+							<field name="flow_control" attrs="{'invisible': [('port_type','=','rj45')]}" />
+							<field name="issimple" />
+							<field name="iscumulative" attrs="{'invisible': [('issimple','=','0')]}" />
+							<field name="port_type" />
+						</group>
+						<label for="type_transmit_protocol_line" string="Type transmit protocols" />
+						<field name="type_transmit_protocol_line" attrs="{'invisible': [('issimple', '=', 'True') ] }">
+							<tree string="Transmit type protocol">
+								<field name="sequence"/>
+								<field name="type"/>
+								<field name="name"/>
+								<field name="language"/>
+							</tree>
+						</field>
+					</sheet>
 				</form>
 			</field>
 		</record>
@@ -327,14 +345,18 @@
 			<field name="model">das.template.supervision</field>
 			<field name="mode">primary</field>
 			<field name="arch" type="xml">
-				<form string="das_template_supervision">
-					<field name="name"/>
-					<field name="mapping"/>
-					<field name="nb_case_x"/>
-					<field name="nb_case_y"/>
-					<field name="width_case"/>
-					<field name="height_case"/>
-					<field name="image"/>
+				<form >
+					<sheet>
+						<group string="DAS Template Supervision">
+							<field name="name"/>
+							<field name="mapping"/>
+							<field name="nb_case_x"/>
+							<field name="nb_case_y"/>
+							<field name="width_case"/>
+							<field name="height_case"/>
+							<field name="image"/>
+						</group>
+					</sheet>
 				</form>
 			</field>
 		</record>
@@ -371,9 +393,13 @@
 			<field name="model">das.template.report</field>
 			<field name="mode">primary</field>
 			<field name="arch" type="xml">
-				<form string="das_template_supervision">
-					<field name="name"/>
-					<field name="xml"/>
+				<form>
+					<sheet>
+						<group string="DAS Template Report">
+							<field name="name"/>
+							<field name="xml"/>
+						</group>
+					</sheet>
 				</form>
 			</field>
 		</record>
@@ -510,7 +536,5 @@
 		
 -->
 		
-
-
 	</data>
 </openerp>
