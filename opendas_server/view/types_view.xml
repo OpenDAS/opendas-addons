@@ -7,10 +7,14 @@
 			<field name="model">das.type.material</field>
 			<field name="type">form</field>
 			<field name="arch" type="xml">
-				<form string="das_type_material">
-					<field name="code" select="1"/>
-					<field name="name" select="1"/>
-					<!--<field name="description" select="2"/>-->	
+				<form>
+					<sheet>
+						<group string="DAS Type Material">
+							<field name="code" select="1"/>
+							<field name="name" select="1"/>
+							<!--<field name="description" select="2"/>-->
+						</group>
+					</sheet>	
 				</form>
 			</field>
 		</record>
@@ -39,12 +43,16 @@
 			<field name="model">das.model.material</field>
 			<field name="type">form</field>
 			<field name="arch" type="xml">
-				<form string="das_model_material">
-					<field name="code" select="1"/>
-					<field name="name" select="1"/>
-					<field name="type_material_id" select="1"/>
-					<field name="constructor_material_id" select="1"/>
-					<field name="description" select="2"/>	
+				<form>
+					<sheet>
+						<group string="DAS Model Material">
+							<field name="code" select="1"/>
+							<field name="name" select="1"/>
+							<field name="type_material_id" select="1"/>
+							<field name="constructor_material_id" select="1"/>
+							<field name="description" select="2"/>
+						</group>
+					</sheet>	
 				</form>
 			</field>
 		</record>
@@ -106,10 +114,14 @@
 			<field name="model">das.type.workstation</field>
 			<field name="type">form</field>
 			<field name="arch" type="xml">
-				<form string="das_type_workstation">
-					<field name="code" select="1"/>
-					<field name="name" select="1"/>
-					<field name="description" select="2"/>
+				<form>
+					<sheet>
+						<group string="DAS Type Workstation">
+							<field name="code" select="1"/>
+							<field name="name" select="1"/>
+							<field name="description" select="2"/>
+						</group>
+					</sheet>
 				</form>
 			</field>
 		</record>
@@ -138,11 +150,14 @@
 			<field name="model">das.transmit.protocol</field>
 			<field name="type">form</field>
 			<field name="arch" type="xml">
-				<form string="das_transmit_protocol">
-					<field name="code" select="1"/>
-					<field name="name" select="2"/>
-					<field name="description" select="0"/>
-	
+				<form >
+					<sheet>
+						<group string="DAS Transmit Protocol">
+							<field name="code" select="1"/>
+							<field name="name" select="2"/>
+							<field name="description" select="0"/>
+						</group>
+					</sheet>
 				</form>
 			</field>
 		</record>
