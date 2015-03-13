@@ -44,9 +44,9 @@ class mrp_production(osv.osv):
         
         for this in self.browse(cr,uid,self.search(cr,uid,filter)):
             temp[this.id] = {
-                                "id":str(this.id),
-                                "name":this.name,
-                                }
+                "id":str(this.id),
+                "name":this.name,
+            }
                
         for i in temp :
             result.append(temp[i])           
@@ -56,7 +56,6 @@ class mrp_production(osv.osv):
 mrp_production()
 
 class mrp_production_product_line(osv.osv):
-    _name = 'mrp.production.product.line'
     _inherit = 'mrp.production.product.line'
     _columns = {
            'min_date': fields.datetime('Min Date'),
@@ -67,20 +66,23 @@ class mrp_production_product_line(osv.osv):
         logger.debug("opendas hr : talend_get_mrp_production_product_line")
         result = []
         temp = {}
-        
-        for this in self.browse(cr,uid,self.search(cr,uid,filter)):
 
-            temp[this.id] = {
-                        "id":"PPL"+","+str(this.id),
-                        "parent_id":str(this.production_id.id) or False,
-                        "name":this.name,
-                        "min_date":str(this.min_date), 
-                        "max_date":str(this.max_date),
-                    }
-               
-        for i in temp :
-            result.append(temp[i])           
-        
+        if 'workcenter' in context:
+            id = int(context['workcenter'][0])
+            workcenter_id = self.pool.get('mrp.workcenter').search(cr,uid,[('otherid','=',id)])
+            ids = self.pool.get('mrp.production.workcenter.line').search(cr,uid,[('workcenter_id','in',workcenter_id)])
+            for this in self.pool.get('mrp.production.workcenter.line').read(cr,uid,ids,['id','name','production_id','date_start','date_planned']):
+                temp[this['id']]= {
+                    "id":"PPL"+","+str(this['id']),
+                    "parent_id":str(this['production_id']) or False,
+                    "name":this['name'],
+                    "date_start":str(this['date_start']), 
+                    "date_planned":str(this['date_planned']),
+                }
+
+            if len(temp) > 0:
+                for i in temp :
+                    result.append(temp[i])
         return {"code":0,"string":_("OK"),"object":result}
     
     def talend_synchro_mrp_production_product_line(self, cr, uid, context, filter):
