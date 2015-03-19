@@ -91,9 +91,15 @@ class mrp_production_product_line(osv.osv):
         if 'id' not in context :
             return {"code":2,"string":_("Error, production product line not in context"),"object":[]}
         
+        print "id :",context['id']
+        
         ids = self.pool.get('mrp.workcenter').search(cr,uid,[('otherid','=', context['workstation_code'])])
         
+        print "ids :",ids
+        
         for i in self.pool.get('mrp.workcenter').read(cr,uid,ids,['date_start','date_stop']):
+            
+            print i
             
             minSec = int(context['min_date'].split(':',1)[0])*60*60 + int(context['min_date'].split(':',1)[1])*60
             maxSec = int(context['max_date'].split(':',1)[0])*60*60 + int(context['max_date'].split(':',1)[1])*60
@@ -101,13 +107,13 @@ class mrp_production_product_line(osv.osv):
             if i['date_start']==False:
                 startSec = minSec
             else:
-                startSec = int(i['date_start'].split(':',1)[0])*60*60 + int(i['date_start'].split(':',1)[1])*60
+                startSec = int(i['min_date'].split(':',1)[0])*60*60 + int(i['date_start'].split(':',1)[1])*60
 
            
             if i['date_stop']==False:
                 stopSec = maxSec 
             else:
-                stopSec = int(i['date_stop'].split(':',1)[0])*60*60 + int(i['date_stop'].split(':',1)[1])*60
+                stopSec = int(i['max_date'].split(':',1)[0])*60*60 + int(i['date_stop'].split(':',1)[1])*60
             
             if startSec <= minSec and maxSec <= stopSec and stopSec >= minSec and maxSec >= startSec:
                 obj = self.browse(cr,uid,context['id'])
@@ -132,7 +138,7 @@ class mrp_production_product_line(osv.osv):
                             return {"code":0,"string":_("Changement de date effectué."),"object":[]}
                         else:
                             if (obj.min_date==context['init_min_date_full']) and (obj.max_date==context['init_max_date_full']) and (obj.name == context['init_name']):
-                                vals = {'min_date': datetime.datetime.strptime(context['min_date_full'], '%Y-%m-%d %H:%M:%S'),'max_date': datetime.datetime.strptime(context['max_date_full'], '%Y-%m-%d %H:%M:%S'), 'name':context['name']}
+                                vals = {'max_date': datetime.datetime.strptime(context['min_date_full'], '%Y-%m-%d %H:%M:%S'),'max_date': datetime.datetime.strptime(context['max_date_full'], '%Y-%m-%d %H:%M:%S'), 'name':context['name']}
                                 self.write(cr, uid, context['id'], vals)
                                 return {"code":0,"string":_("Changement de date effectué."),"object":[]}
                             else:
@@ -227,7 +233,7 @@ class mrp_production_workcenter_line(osv.osv):
         'qty_false':fields.integer('Quantity false'),
         'qty_ok':fields.integer('Quantity ok'),
     }
-    
+  
     def lost_time(self, cr, uid, ids, context={}):
         logger.debug("opendas hr : mrp_production_workcenter_line lost_time")
         employee = self.pool.get('hr.employee').browse(cr,uid,context['employee'])

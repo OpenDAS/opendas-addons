@@ -34,6 +34,9 @@ from openerp.tools.translate import _
 import openerp.tools
 import datetime
 import base64
+import logging
+import logging.handlers
+logger = logging.getLogger(__name__)
 
 class mrp_production(osv.osv):
     _inherit = 'mrp.production'
@@ -92,3 +95,76 @@ class mrp_production(osv.osv):
         return {"code":0,"string":_("OK"),"object":result}
     
 mrp_production()
+
+class mrp_production_workcenter_line(osv.osv):
+    _inherit = "mrp.production.workcenter.line"
+
+    def talend_get_mrp_production_workcenter_line(self, cr, uid, context, filter):
+        logger.debug("opendas hr : talend_get_mrp_production_workcenter_line")
+        result = []
+        temp = {}
+
+        if 'workcenter' in context:
+            id = int(context['workcenter'][0])
+            workcenter_id = self.pool.get('mrp.workcenter').search(cr,uid,[('otherid','=',id)])
+            ids = self.pool.get('mrp.production.workcenter.line').search(cr,uid,[('workcenter_id','in',workcenter_id)])
+            for this in self.read(cr,uid,ids,['id','name','production_id','date_start','date_planned']):
+                temp[this['id']]= {
+                    "id":"PPL"+","+str(this['id']),
+                    "parent_id":str(this['production_id']) or False,
+                    "name":this['name'],
+                    "date_start":str(this['date_start']), 
+                    "date_planned":str(this['date_planned']),
+                }
+
+            if len(temp) > 0:
+                for i in temp :
+                    result.append(temp[i])
+        return {"code":0,"string":_("OK"),"object":result}
+    
+    def talend_synchro_mrp_production_workcenter_line(self, cr, uid, context, filter):
+        logger.debug("opendas hr : talend_synchro_mrp_production_workcenter_line")
+  
+        print context
+  
+        if 'id' not in context :
+            return {"code":2,"string":_("Error, production workcenter line not in context"),"object":[]}
+        
+        obj = self.browse(cr,uid,context['id'])
+        print obj        
+        if obj :
+            
+#             min_date = datetime.datetime.strptime(context['min_date_full'], '%Y-%m-%d %H:%M:%S')   
+#             max_date = datetime.datetime.strptime(context['max_date_full'], '%Y-%m-%d %H:%M:%S')
+            
+            min_date = context['min_date_full']   
+            max_date = context['max_date_full']           
+            
+            if context['delete']==True:
+                if (obj.date_start==min_date) and (obj.date_planned==max_date) and (obj.name == context['name']):
+                    osv.osv.unlink(self, cr, uid, context['id'], context=context)
+                    return {"code":0,"string":_("Evenement supprimé."),"object":[]}
+                else:
+                    if context['override']==True:
+                        osv.osv.unlink(self, cr, uid, context['id'], context=context)
+                        return {"code":0,"string":_("Evenement supprimé."),"object":[]}
+                    else:
+                        return {"code":4,"string":_("Des modifications concurentes ont été effectuées. L'évement :\n"+obj.name+"("+str(obj.date_start)[:16]+" , "+str(obj.date_planned)[:16]+") sera supprimé. Valider la suppression ?"),"object":[]}
+            
+            else:
+                #Ecrasement de l'ancien
+                if context['override']==True:
+                    vals = {'date_start':min_date,'date_planned' :max_date, 'name':context['name']}
+                    self.write(cr, uid, context['id'], vals)
+                    return {"code":0,"string":_("Changement de date effectué."),"object":[]}
+                else:
+                    if (obj.date_start==context['init_min_date_full']) and (obj.date_planned==context['init_max_date_full']) and (obj.name == context['init_name']):
+                        vals = {'date_start': min_date,'date_planned': max_date, 'name':context['name']}
+                        self.write(cr, uid, context['id'], vals)
+                        return {"code":0,"string":_("Changement de date effectué."),"object":[]}
+                    else:
+                        return {"code":4,"string":_("Des modifications concurentes ont été effectuées. L'évement :\n"+obj.name+"("+str(obj.date_start)[:16]+" , "+str(obj.date_planned)[:16]+") sera remplacé par\n"+context['name']+"("+str(context['min_date_full'])[:16]+" , "+str(context['max_date_full'])[:16]+")\nValider ces changements ?")}                                      
+        else:
+            return {"code":2,"string":_("Error, no picking found : wrong id"),"object":[]}                                                                                                                                                                                           
+
+mrp_production_workcenter_line()
