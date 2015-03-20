@@ -113,8 +113,8 @@ class mrp_production_workcenter_line(osv.osv):
                     "id":"PPL"+","+str(this['id']),
                     "parent_id":str(this['production_id']) or False,
                     "name":this['name'],
-                    "date_start":str(this['date_start']), 
-                    "date_planned":str(this['date_planned']),
+                    "min_date":str(this['date_start']), 
+                    "max_date":str(this['date_planned']),
                 }
 
             if len(temp) > 0:
