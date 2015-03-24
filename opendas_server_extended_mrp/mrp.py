@@ -40,10 +40,6 @@ logger = logging.getLogger(__name__)
 
 class mrp_production(osv.osv):
     _inherit = 'mrp.production'
-    _columns = {
-    }
-    _defaults = {
-    }
     
     def talend_get_production(self, cr, uid, context, filter):
         print "talend_get_production"
@@ -59,9 +55,27 @@ class mrp_production(osv.osv):
             vals.update({'id':key+","+str(this.id),'name':this.name})
             result.append(vals)
         return {"code":0,"string":_("OK"),"object":result}
-    
+
+    def talend_get_productions(self, cr, uid, context, filter):
+        logger.debug("talend_get_productions")
+#        print context
+#        print filter
+        result = []
+#        filter.extend([('type','=','out'),('purchase_id','!=',False),('state','in',('draft','auto','confirmed','assigned'))])
+        key = "PRODUCTION"
+        obj_ids = self.browse(cr,uid,self.search(cr,uid,filter))
+        for this in obj_ids:       
+            vals = {
+                    'id' : key+","+str(this.id),
+                    'name' : this.name,
+                    'min_date' : str(this.date_start),
+                    'max_date' : str(this.date_finished),
+            }
+            result.append(vals)
+        return {"code":0,"string":_("OK"),"object":result}
+
     def talend_get_report_production(self, cr, uid, context, filter):
-        print "talend_get_report_production"
+        logger.debug("opendas mrp : talend_get_report_production")
 #        print context
 #        print filter
         result = []
