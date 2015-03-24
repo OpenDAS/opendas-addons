@@ -81,7 +81,7 @@ class mrp_production(osv.osv):
             return {"code":2,"string":_("Error, production not in context"),"object":[]}
         
         obj = self.browse(cr,uid,context['id'])
-        print obj       
+       
         if obj :
 
             min_date = context['min_date_full']   
@@ -96,8 +96,7 @@ class mrp_production(osv.osv):
                         osv.osv.unlink(self, cr, uid, context['id'], context=context)
                         return {"code":0,"string":_("Evenement supprimé."),"object":[]}
                     else:
-                        return {"code":4,"string":_("Des modifications concurentes ont été effectuées. L'évement :\n"+obj.name+"("+str(obj.date_start)[:16]+" , "+str(obj.date_planned)[:16]+") sera supprimé. Valider la suppression ?"),"object":[]}
-            
+                        return {"code":4,"string":_("Des modifications concurentes ont été effectuées. L'évement :\n"+obj.name+"("+str(obj.date_start)[:16]+" , "+str(obj.date_planned)[:16]+") sera supprimé. Valider la suppression ?"),"object":[]}          
             else:
                 #Ecrasement de l'ancien
                 if context['override']==True:
