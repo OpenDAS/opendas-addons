@@ -74,6 +74,47 @@ class mrp_production(osv.osv):
             result.append(vals)
         return {"code":0,"string":_("OK"),"object":result}
 
+    def talend_synchro_mrp_production(self, cr, uid, context, filter):
+        logger.debug("opendas hr : talend_synchro_mrp_production")
+
+        if 'id' not in context :
+            return {"code":2,"string":_("Error, production not in context"),"object":[]}
+        
+        obj = self.browse(cr,uid,context['id'])
+        print obj       
+        if obj :
+
+            min_date = context['min_date_full']   
+            max_date = context['max_date_full']           
+            
+            if context['delete']==True:
+                if (obj.date_start==min_date) and (obj.date_finished==max_date) and (obj.name == context['name']):
+                    osv.osv.unlink(self, cr, uid, context['id'], context=context)
+                    return {"code":0,"string":_("Evenement supprimé."),"object":[]}
+                else:
+                    if context['override']==True:
+                        osv.osv.unlink(self, cr, uid, context['id'], context=context)
+                        return {"code":0,"string":_("Evenement supprimé."),"object":[]}
+                    else:
+                        return {"code":4,"string":_("Des modifications concurentes ont été effectuées. L'évement :\n"+obj.name+"("+str(obj.date_start)[:16]+" , "+str(obj.date_planned)[:16]+") sera supprimé. Valider la suppression ?"),"object":[]}
+            
+            else:
+                #Ecrasement de l'ancien
+                if context['override']==True:
+                    vals = {'date_start':min_date,'date_finished' :max_date, 'name':context['name']}
+                    self.write(cr, uid, context['id'], vals)
+                    return {"code":0,"string":_("Changement de date effectué."),"object":[]}
+                else:
+                    if (obj.date_start==context['init_min_date_full']) and (obj.date_finished==context['init_max_date_full']) and (obj.name == context['init_name']):
+                        vals = {'date_start': min_date,'date_finished': max_date, 'name':context['name']}
+                        self.write(cr, uid, context['id'], vals)
+                        return {"code":0,"string":_("Changement de date effectué."),"object":[]}
+                    else:
+                        return {"code":4,"string":_("Des modifications concurentes ont été effectuées. L'évement :\n"+obj.name+"("+str(obj.date_start)[:16]+" , "+str(obj.date_planned)[:16]+") sera remplacé par\n"+context['name']+"("+str(context['min_date_full'])[:16]+" , "+str(context['max_date_full'])[:16]+")\nValider ces changements ?")}                                      
+        else:
+            return {"code":2,"string":_("Error, no picking found : wrong id"),"object":[]}
+
+
     def talend_get_report_production(self, cr, uid, context, filter):
         logger.debug("opendas mrp : talend_get_report_production")
 #        print context
@@ -145,7 +186,7 @@ class mrp_production_workcenter_line(osv.osv):
             return {"code":2,"string":_("Error, production workcenter line not in context"),"object":[]}
         
         obj = self.browse(cr,uid,context['id'])
-        print obj        
+        print obj       
         if obj :
             
 #             min_date = datetime.datetime.strptime(context['min_date_full'], '%Y-%m-%d %H:%M:%S')   
