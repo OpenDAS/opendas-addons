@@ -160,53 +160,58 @@
 			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form string="das_workstation">
-					<field name="code" select="1"/>
-					<field name="name" select="1"/>
-					<field name="type_workstation_id" select="1"/>
-					<field name="constructor_material_id" select="1"/>
-					<field name="os_id" select="2"/>
-					<newline/>
-					<field name="os_user" select="2"/>
-					<field name="os_password"/>
-					<newline/>
-					<field name="ip_id" select="2"/>
-					<field name="mac_address" select="0"/>
-					<newline/>
-					<field name="location" select="0"/>
-					<field name="phone_number" select="0"/>
-					<newline/>
-					<field name="hour_start_activity" select="2"/>
-					<field name="hour_stop_activity" select="2"/>
-					<newline/>
-					<field name="force_pdf" select="0"/><!--
-					<field name="mask" select="0"/>
-					<field name="gui_xml" colspan="4" select="0"/>
-					-->
-					<newline/>
-					<field name="application_user" select="0"/>
-					<field name="application_password" select="0"/>
-					<newline/>
-					<!--
-					<field name="activemq_user" select="0"/>
-					<field name="activemq_password" select="0"/>
-					<field name="activemq_url" select="0"/>
-					-->
-					<field name="config_ids"/>
-					<newline/>
-					<field name="graphical_configuration_ids">
-						<tree>
-							<field name="name"/>
-							<field name="mask"/>
-						</tree>
-					</field>
-					<field name="functional_configuration_ids">
-						<tree>
-							<field name="name"/>
-							<field name="mask"/>
-						</tree>
-					</field>
-					<newline/>
-					<field name="description"/>
+					<sheet>
+						<group string="DAS Workstation">
+							<field name="code" select="1"/>
+							<field name="name" select="1"/>
+							<field name="type_workstation_id" select="1"/>
+							<field name="constructor_material_id" select="1"/>
+							<field name="os_id" select="2"/>
+		
+							<field name="os_user" select="2"/>
+							<field name="os_password"/>
+		
+							<field name="ip_id" select="2"/>
+							<field name="mac_address" select="0"/>
+		
+							<field name="location" select="0"/>
+							<field name="phone_number" select="0"/>
+		
+							<field name="hour_start_activity" select="2"/>
+							<field name="hour_stop_activity" select="2"/>
+		
+							<field name="force_pdf" select="0"/><!--
+							<field name="mask" select="0"/>
+							<field name="gui_xml" colspan="4" select="0"/>
+							-->
+		
+							<field name="application_user" select="0"/>
+							<field name="application_password" select="0"/>
+		
+							<!--
+							<field name="activemq_user" select="0"/>
+							<field name="activemq_password" select="0"/>
+							<field name="activemq_url" select="0"/>
+							-->
+						</group>
+						<label for="config_ids" string="Material config" />
+						<field name="config_ids"/>
+						<label for="graphical_configuration_ids" string="Graphical configuration" />
+						<field name="graphical_configuration_ids">
+							<tree>
+								<field name="name"/>
+								<field name="mask"/>
+							</tree>
+						</field>
+						<label for="functional_configuration_ids" string="Functional configuration" />
+						<field name="functional_configuration_ids">
+							<tree>
+								<field name="name"/>
+								<field name="mask"/>
+							</tree>
+						</field>
+						<field name="description"/>				
+					</sheet>
 				</form>
 			</field>
 		</record>
@@ -238,17 +243,17 @@
 		<record model="ir.ui.view" id="view_das_config_material_form">
 			<field name="name">das.config.material.form</field>
 			<field name="model">das.config.material</field>
-			<field name="mode">primary</field>
+			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form>
 					<sheet>
 						<group string="Material Config">
-							<field name="code" select="1"/>
-							<field name="name" select="2"/>
-							<field name="workstation_id" select="1"/>
-							<field name="material_id" select="1"/>
-							<field name="config_type_material_id" select="2"/>
-							<field name="port" select="2"/>
+							<field name="code"/>
+							<field name="name"/>
+							<field name="workstation_id"/>
+							<field name="material_id"/>
+							<field name="config_type_material_id"/>
+							<field name="port"/>
 							<field name="description"/>
 						</group>
 					</sheet>
@@ -340,10 +345,10 @@
 
 		<!-- DAS TEMPLATE SUPERVISION -->
 
-		<record model="ir.ui.view" id="view_das_config_material_form">
+		<record model="ir.ui.view" id="view_das_template_supervision_form">
 			<field name="name">das.template.supervision.form</field>
 			<field name="model">das.template.supervision</field>
-			<field name="mode">primary</field>
+			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form >
 					<sheet>
