@@ -66,7 +66,7 @@
 		<field name="arch" type="xml">
 			<form>
 				<sheet>
-					<group string="Generic datas">
+					<group string="Generic data">
 						<field name="data_model_id" select="1"/>
 						<field name="workstation_id" select="1"/>
 						<field name="code" select="1"/>
@@ -88,7 +88,7 @@
 		<field name="model">das.generic</field>
 		<field name="type">tree</field>
 		<field name="arch" type="xml">
-			<tree string="Generic datas">
+			<tree string="Generic data">
 				<field name="data_model_id"/>
 				<field name="workstation_id"/>
 				<field name="code"/>
@@ -100,7 +100,7 @@
 		</field>
 	</record>
 	<record model="ir.actions.act_window" id="action_das_generic">
-		<field name="name">Generic datas</field>
+		<field name="name">Generic data</field>
 		<field name="res_model">das.generic</field>
 		<field name="view_type">form</field>
 		<field name="view_mode">tree,form</field>
