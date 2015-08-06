@@ -175,7 +175,7 @@
 			</field>
 		</record>
 		<record model="ir.actions.act_window" id="action_das_transmit_protocol">
-			<field name="name">Transmit protocol</field>
+			<field name="name">Transmit Protocols</field>
 			<field name="res_model">das.transmit.protocol</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>

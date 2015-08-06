@@ -52,7 +52,7 @@
 		</field>
 	</record>
 	<record model="ir.actions.act_window" id="action_das_data_model">
-		<field name="name">Data models</field>
+		<field name="name">Data Models</field>
 		<field name="res_model">das.data.model</field>
 		<field name="view_type">form</field>
 		<field name="view_mode">tree,form</field>
@@ -77,7 +77,7 @@
 						<field name="page"/>
 						<field name="position"/>
 					</group>
-					<label for="dependencies" string="Data models" />
+					<label for="dependencies" string="Dependencies" />
 					<field name="dependencies"/>
 				</sheet>
 			</form>
@@ -100,7 +100,7 @@
 		</field>
 	</record>
 	<record model="ir.actions.act_window" id="action_das_generic">
-		<field name="name">Generic data</field>
+		<field name="name">Generic Data</field>
 		<field name="res_model">das.generic</field>
 		<field name="view_type">form</field>
 		<field name="view_mode">tree,form</field>
