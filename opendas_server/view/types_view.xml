@@ -31,7 +31,7 @@
 			</field>
 		</record>
 		<record model="ir.actions.act_window" id="action_das_type_material">
-			<field name="name">Type Material</field>
+			<field name="name">Material Type</field>
 			<field name="res_model">das.type.material</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
@@ -70,7 +70,7 @@
 			</field>
 		</record>
 		<record model="ir.actions.act_window" id="action_das_model_material">
-			<field name="name">Model Material</field>
+			<field name="name">Material Model</field>
 			<field name="res_model">das.model.material</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
@@ -102,7 +102,7 @@
 			</field>
 		</record>
 		<record model="ir.actions.act_window" id="action_das_acquisition_method">
-			<field name="name">das.acquisition.method</field>
+			<field name="name">DAS Acquisition Method</field>
 			<field name="res_model">das.acquisition.method</field>
 			<field name="view_type">form</field>
 			<field name="view_id" ref="view_das_acquisition_method_tree"/>
@@ -138,7 +138,7 @@
 			</field>
 		</record>
 		<record model="ir.actions.act_window" id="action_das_type_workstation">
-			<field name="name">Workstation type</field>
+			<field name="name">Workstation Type</field>
 			<field name="res_model">das.type.workstation</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>

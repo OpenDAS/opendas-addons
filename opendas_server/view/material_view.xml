@@ -80,7 +80,7 @@
 			<field name="arch" type="xml">
 				<form>
 					<sheet>
-						<group string="DAS Graphical configuration">
+						<group string="Graphical Configuration">
 							<field name="name" select="1"/>
 							<field name="mask" select="1"/>
 							<field name="graphical_xml" select="2"/>
@@ -94,14 +94,14 @@
 			<field name="model">das.graphical.configuration</field>
 			<field name="type">tree</field>
 			<field name="arch" type="xml">
-				<tree string="DAS Graphical configuration">
+				<tree string="Graphical Configuration">
 					<field name="name"/>
 					<field name="mask"/>
 				</tree>
 			</field>
 		</record>
 		<record model="ir.actions.act_window" id="action_das_graphical_configuration">
-			<field name="name">Graphical configs</field>
+			<field name="name">Graphical Configuration</field>
 			<field name="res_model">das.graphical.configuration</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
@@ -147,7 +147,7 @@
 			</field>
 		</record>
 		<record model="ir.actions.act_window" id="action_das_functional_configuration">
-			<field name="name">Functional configs</field>
+			<field name="name">Functional Configuration</field>
 			<field name="res_model">das.functional.configuration</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
@@ -194,7 +194,7 @@
 							<field name="activemq_url" select="0"/>
 							-->
 						</group>
-						<label for="config_ids" string="Material config" />
+						<label for="config_ids" string="Material configuration" />
 						<field name="config_ids"/>
 						<label for="graphical_configuration_ids" string="Graphical configuration" />
 						<field name="graphical_configuration_ids">
@@ -247,7 +247,7 @@
 			<field name="arch" type="xml">
 				<form>
 					<sheet>
-						<group string="Material Config">
+						<group string="Material Configuration">
 							<field name="code"/>
 							<field name="name"/>
 							<field name="workstation_id"/>
@@ -276,7 +276,7 @@
 			</field>
 		</record>
 		<record model="ir.actions.act_window" id="action_das_config_material">
-			<field name="name">Config Materials</field>
+			<field name="name">Material Configuration</field>
 			<field name="res_model">das.config.material</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
@@ -336,7 +336,7 @@
 		</record>
 
 		<record model="ir.actions.act_window" id="action_das_config_type_material">
-			<field name="name">Config Type Materials</field>
+			<field name="name">Material Type Config</field>	
 			<field name="res_model">das.config.type.material</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
@@ -384,7 +384,7 @@
 		</record>
 
 		<record model="ir.actions.act_window" id="action_das_template_supervision">
-			<field name="name">Template Supervision</field>
+			<field name="name">Supervision Template</field>
 			<field name="res_model">das.template.supervision</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
@@ -422,7 +422,7 @@
 		</record>
 		
 		<record model="ir.actions.act_window" id="action_das_template_report">
-			<field name="name">Template Report</field>
+			<field name="name">Report Template</field>
 			<field name="res_model">das.template.report</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>

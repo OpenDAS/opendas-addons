@@ -112,7 +112,7 @@
 		<field name="model">das.consumer.config</field>
 		<field name="type">form</field>
 		<field name="arch" type="xml">
-			<form string="Consumers Configuration">
+			<form string="Consumer Configuration">
 				<field name="consumer_id" select="1"/>
 				<field name="subject" select="1"/>
 
@@ -124,14 +124,14 @@
 		<field name="model">das.consumer.config</field>
 		<field name="type">tree</field>
 		<field name="arch" type="xml">
-			<tree string="Consumers Configuration" editable="bottom">
+			<tree string="Consumer Configuration" editable="bottom">
 				<field name="consumer_id"/>
 				<field name="subject"/>
 			</tree>
 		</field>
 	</record>
 	<record model="ir.actions.act_window" id="action_das_consumer_config">
-		<field name="name">Consumers Configuration</field>
+		<field name="name">Consumer Configuration</field>
 		<field name="res_model">das.consumer.config</field>
 		<field name="view_type">form</field>
 		<field name="view_id" ref="view_das_consumer_config_tree"/>
