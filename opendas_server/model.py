@@ -38,7 +38,7 @@ class das_data_model(osv.osv):
 #		'ctrl': fields.char('Validation method', size=255),
 		#Function name to call source
 		'fct_name': fields.char('Function name to call source', size=32),
-		'type_select': fields.selection([('0',_('Datas for workstation')),('1',_('Datas for workstation and datas for all workstations'))], 'Specialized datas or specialized and global datas?', select=True),
+		'type_select': fields.selection([('0',_('Data for workstation')),('1',_('Data for workstation and data for all workstations'))], 'Specialized datas or specialized and global datas?', select=True),
 		#Acquisition methods 
 		'acquisition_methods': fields.many2many('das.acquisition.method', 'das_data_model_acquisition_method_rel', 'data_model_id','acquisition_method_id',  'Acquisition methods'),
 		'max_length': fields.integer('Maximum length for keyboards'),
