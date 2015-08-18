@@ -282,7 +282,6 @@
 			<field name="view_mode">tree,form</field>
 		</record>
 		<menuitem parent="menu_configuration" id="menu_das_config_material" action="action_das_config_material"/>
-	
 		<record model="ir.ui.view" id="view_das_config_type_material_tree">
 			<field name="name">das.config.type.material.tree</field>
 			<field name="model">das.config.type.material</field>
@@ -342,6 +341,54 @@
 			<field name="view_mode">tree,form</field>
 		</record>
 		<menuitem parent="menu_configuration" id="menu_das_config_type_material" action="action_das_config_type_material"/>
+
+		<!-- DAS PROTOCOL TRANSMIT TYPE -->
+
+		<record model="ir.ui.view" id="view_das_type_transmit_protocol_tree">
+			<field name="name">das.type.transmit.protocol.tree</field>
+			<field name="model">das.type.transmit.protocol</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="das_config_type_material">
+					<field name="sequence"/>
+					<field name="config_type_material_id"/>
+					<field name="type"/>
+					<field name="name"/>
+					<field name="language"/>
+				</tree>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="view_das_type_transmit_protocol_form">
+			<field name="name">das.type.transmit.protocol.form</field>
+			<field name="model">das.type.transmit.protocol</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="das_config_type_material">
+					<sheet>
+						<field name="sequence"/>
+						<field name="config_type_material_id"/>
+						<field name="type"/>
+						<field name="name"/>
+						<field name="language"/>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_das_type_transmit_protocol_form">
+			<field name="name">Transmit Protocol Type</field>	
+			<field name="res_model">das.type.transmit.protocol</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<menuitem parent="menu_configuration" id="menu_das_type_transmit_protocol" action="action_das_type_transmit_protocol_form"/>
+
+
+
+
+
+
+
 
 		<!-- DAS TEMPLATE SUPERVISION -->
 
