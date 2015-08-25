@@ -349,7 +349,7 @@
 			<field name="model">das.type.transmit.protocol</field>
 			<field name="type">tree</field>
 			<field name="arch" type="xml">
-				<tree string="das_config_type_material">
+				<tree string="das_type_transmit_protocol">
 					<field name="sequence"/>
 					<field name="config_type_material_id"/>
 					<field name="type"/>
@@ -363,13 +363,15 @@
 			<field name="model">das.type.transmit.protocol</field>
 			<field name="type">form</field>
 			<field name="arch" type="xml">
-				<form string="das_config_type_material">
+				<form string="das_type_transmit_protocol">
 					<sheet>
-						<field name="sequence"/>
-						<field name="config_type_material_id"/>
-						<field name="type"/>
-						<field name="name"/>
-						<field name="language"/>
+						<group string="DAS Type Transmit Protocol">
+							<field name="sequence"/>
+							<field name="config_type_material_id"/>
+							<field name="type"/>
+							<field name="name"/>
+							<field name="language"/>
+						</group>
 					</sheet>
 				</form>
 			</field>
